@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.support.v13.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
+import android.view.Menu;
+import android.view.MenuItem;
 
 /**
  * Created by Nic on 1/6/2015.
@@ -38,14 +40,15 @@ public class LiftActivity extends Activity implements ActionBar.TabListener{
         }
 
         viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            @Override
-            public void onPageScrolled(int i, float v, int i2) {
-
-            }
 
             @Override
             public void onPageSelected(int position) {
-                actionBar.setSelectedNavigationItem(position);
+                getActionBar().setSelectedNavigationItem(position);
+            }
+
+            @Override
+            public void onPageScrolled(int i, float v, int i2) {
+
             }
 
             @Override
@@ -68,5 +71,16 @@ public class LiftActivity extends Activity implements ActionBar.TabListener{
     @Override
     public void onTabReselected(ActionBar.Tab tab, FragmentTransaction ft) {
 
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        return super.onOptionsItemSelected(item);
     }
 }
