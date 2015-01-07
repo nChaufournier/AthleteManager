@@ -11,8 +11,7 @@
         android:layout_weight="1"
         android:textSize="30sp"
         android:gravity="center"
-        android:textColor="#FFFFFF"
-        android:background="@color/primary_material_dark"/>
+        android:textColor="#FFFFFF"/>
     <LinearLayout
         android:id="@+id/topButtonSection"
         android:layout_width="fill_parent"
@@ -20,7 +19,6 @@
         android:layout_weight="1"
         android:orientation="horizontal"
         android:gravity="center_horizontal"
-        android:background="@color/primary_material_dark"
         >
 
         <Button
@@ -31,7 +29,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <ImageButton
-            android:scaleType="fitXY"
             android:contentDescription="Button to Schedule"
             android:src="@drawable/ic_action_event"
             android:id="@+id/btnSchedule"

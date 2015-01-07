@@ -1,17 +1,39 @@
 package com.sleepypirate.athletemanager;
 
+import android.app.ActionBar;
+import android.app.Activity;
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.ListView;
 
 
-public class MainActivity extends ActionBarActivity {
-
+public class MainActivity extends Activity {
+    Button btnLifts;
+    Button btnFood;
+    ImageButton btnSchedule;
+    ListView lvUpdates;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        btnLifts = (Button) findViewById(R.id.btnLifts);
+        btnFood = (Button) findViewById(R.id.btnFood);
+        btnSchedule = (ImageButton) findViewById(R.id.btnSchedule);
+        lvUpdates = (ListView) findViewById(R.id.lvUpdates);
+
+        btnLifts.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(v.getContext(), LiftActivity.class);
+                startActivity(i);
+            }
+        });
     }
 
 
