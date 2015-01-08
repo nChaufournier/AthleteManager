@@ -81,6 +81,7 @@ public class LiftActivity extends Activity implements ActionBar.TabListener{
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+
         return super.onOptionsItemSelected(item);
     }
 }

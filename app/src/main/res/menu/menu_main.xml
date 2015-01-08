@@ -5,6 +5,7 @@
     <item android:id="@+id/action_settings" android:title="@string/action_settings"
         android:orderInCategory="100" app:showAsAction="never" />
     <item  android:title="addLift"
-        android:icon="@drawable/ic_note_add_white_18dp"
+        android:id="@+id/addLift"
+        android:icon="@drawable/ic_note_add_white_24dp"
         android:showAsAction="ifRoom"></item>
 </menu>
