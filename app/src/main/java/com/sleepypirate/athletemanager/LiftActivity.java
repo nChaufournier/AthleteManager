@@ -9,6 +9,7 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 /**
  * Created by Nic on 1/6/2015.
@@ -81,7 +82,14 @@ public class LiftActivity extends Activity implements ActionBar.TabListener{
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-
+        switch (item.getItemId()){
+            case R.id.action_settings:
+                Toast.makeText(this, "Settings!", Toast.LENGTH_LONG).show();
+                return true;
+            case R.id.addLift:
+                Toast.makeText(this, "Add a Lift!", Toast.LENGTH_LONG).show();
+                return true;
+        }
         return super.onOptionsItemSelected(item);
     }
 }
