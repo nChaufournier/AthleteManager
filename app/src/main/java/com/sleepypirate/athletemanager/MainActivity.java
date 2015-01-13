@@ -8,8 +8,10 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 
 
@@ -18,6 +20,20 @@ public class MainActivity extends Activity {
     Button btnFood;
     ImageButton btnSchedule;
     ListView lvUpdates;
+    String[] recentAct = {
+            "TODAY",
+            "Bench: 250",
+            "Math Homework due Tomorrow",
+            "Test Wednesday",
+            "Cheeseburger, fries, pizza",
+            "Team Meeting: Friday 6pm Study Room",
+            "Practice Tuesday 6:30pm Aux Gym",
+            "YESTERDAY",
+            "Food: 2600 Cal",
+            "Biggest Lift Increase"
+
+    };
+    private ArrayAdapter mArrayAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,6 +43,10 @@ public class MainActivity extends Activity {
         btnSchedule = (ImageButton) findViewById(R.id.btnSchedule);
         lvUpdates = (ListView) findViewById(R.id.lvUpdates);
 
+        mArrayAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, recentAct);
+        if(lvUpdates !=null){
+            lvUpdates.setAdapter(mArrayAdapter);
+        }
         btnLifts.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
