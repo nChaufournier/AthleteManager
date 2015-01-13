@@ -22,15 +22,16 @@ public class MainActivity extends Activity {
     ListView lvUpdates;
     String[] recentAct = {
             "TODAY",
-            "Bench: 250",
-            "Math Homework due Tomorrow",
-            "Test Wednesday",
-            "Cheeseburger, fries, pizza",
+            "Workouts: 1hr",
+            "Homework: 3 Due",
+            "Calories: 1200",
             "Team Meeting: Friday 6pm Study Room",
             "Practice Tuesday 6:30pm Aux Gym",
             "YESTERDAY",
-            "Food: 2600 Cal",
-            "Biggest Lift Increase"
+            "Workouts: 3hrs",
+            "Calories: 2600",
+            "Homework: 1 Due",
+            "Practice: 6:30"
 
     };
     private ArrayAdapter mArrayAdapter;

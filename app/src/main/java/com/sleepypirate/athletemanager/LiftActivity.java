@@ -3,6 +3,7 @@ package com.sleepypirate.athletemanager;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v13.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentActivity;
@@ -76,7 +77,7 @@ public class LiftActivity extends Activity implements ActionBar.TabListener{
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_main, menu);
+        getMenuInflater().inflate(R.menu.menu_lift, menu);
         return true;
     }
 
@@ -89,6 +90,9 @@ public class LiftActivity extends Activity implements ActionBar.TabListener{
             case R.id.addLift:
                 Toast.makeText(this, "Add a Lift!", Toast.LENGTH_LONG).show();
                 return true;
+            case R.id.liftBackButton:
+                Intent i = new Intent(this, MainActivity.class);
+                startActivity(i);
         }
         return super.onOptionsItemSelected(item);
     }

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item  android:title="addLift"
+        android:id="@+id/addLift"
+        android:icon="@drawable/ic_note_add_white_24dp"
+        android:showAsAction="ifRoom"></item>
+
+    <item android:title="backMain"
+        android:id="@+id/liftBackButton"
+        android:icon="@drawable/ic_action_back"
+
+        android:showAsAction="ifRoom"></item>
+</menu>
