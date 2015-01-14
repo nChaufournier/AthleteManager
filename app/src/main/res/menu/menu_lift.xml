@@ -3,11 +3,7 @@
     <item  android:title="addLift"
         android:id="@+id/addLift"
         android:icon="@drawable/ic_note_add_white_24dp"
-        android:showAsAction="ifRoom"></item>
+        android:showAsAction="always|withText"/>
 
-    <item android:title="backMain"
-        android:id="@+id/liftBackButton"
-        android:icon="@drawable/ic_action_back"
 
-        android:showAsAction="ifRoom"></item>
 </menu>

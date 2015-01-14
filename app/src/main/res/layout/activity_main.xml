@@ -5,7 +5,7 @@
     android:weightSum="5">
     <TextView
         android:id="@+id/tvManage"
-        android:text="Manange Your Life"
+        android:text="Manage Your Life"
         android:layout_width="fill_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
@@ -21,28 +21,28 @@
         android:gravity="center_horizontal"
         >
 
-        <Button
+        <ImageButton
             android:id="@+id/btnLifts"
             android:text="Lifts"
-            android:padding="30dp"
-            android:layout_marginTop="8dp"
+            android:padding="40dp"
+            android:layout_marginRight="35dp"
+            android:background="@drawable/ic_lift"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <ImageButton
             android:contentDescription="Button to Schedule"
-            android:src="@drawable/ic_action_event"
             android:id="@+id/btnSchedule"
-            android:layout_below="@id/btnLifts"
             android:text="Schedule"
-            android:padding="30dp"
-            android:background="@null"
+            android:layout_marginRight="35dp"
+            android:padding="40dp"
+            android:background="@drawable/ic_schedule"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
-        <Button
+        <ImageButton
             android:id="@+id/btnFood"
             android:text="Food"
-            android:padding="30dp"
-            android:layout_marginTop="8dp"
+            android:background="@drawable/ic_food"
+            android:padding="40dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 

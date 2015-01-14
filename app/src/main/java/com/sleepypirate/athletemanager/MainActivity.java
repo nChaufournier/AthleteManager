@@ -16,8 +16,8 @@ import android.widget.ListView;
 
 
 public class MainActivity extends Activity {
-    Button btnLifts;
-    Button btnFood;
+    ImageButton btnLifts;
+    ImageButton btnFood;
     ImageButton btnSchedule;
     ListView lvUpdates;
     String[] recentAct = {
@@ -39,8 +39,8 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        btnLifts = (Button) findViewById(R.id.btnLifts);
-        btnFood = (Button) findViewById(R.id.btnFood);
+        btnLifts = (ImageButton) findViewById(R.id.btnLifts);
+        btnFood = (ImageButton) findViewById(R.id.btnFood);
         btnSchedule = (ImageButton) findViewById(R.id.btnSchedule);
         lvUpdates = (ListView) findViewById(R.id.lvUpdates);
 

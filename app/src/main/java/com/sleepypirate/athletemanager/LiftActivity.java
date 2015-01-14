@@ -13,7 +13,7 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 /**
- * Created by Nic on 1/6/2015.
+ * Lifting Activity shows creation of lifts plus past lifts
  */
 public class LiftActivity extends Activity implements ActionBar.TabListener{
     private ViewPager viewPager;
@@ -58,6 +58,8 @@ public class LiftActivity extends Activity implements ActionBar.TabListener{
 
             }
         });
+
+        getActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     @Override
@@ -84,15 +86,12 @@ public class LiftActivity extends Activity implements ActionBar.TabListener{
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
-            case R.id.action_settings:
-                Toast.makeText(this, "Settings!", Toast.LENGTH_LONG).show();
+            case android.R.id.home:
+                finish();
                 return true;
             case R.id.addLift:
                 Toast.makeText(this, "Add a Lift!", Toast.LENGTH_LONG).show();
                 return true;
-            case R.id.liftBackButton:
-                Intent i = new Intent(this, MainActivity.class);
-                startActivity(i);
         }
         return super.onOptionsItemSelected(item);
     }
