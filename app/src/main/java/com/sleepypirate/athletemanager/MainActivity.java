@@ -14,6 +14,8 @@ import android.widget.ImageButton;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 
+import com.sleepypirate.athletemanager.schedule.ScheduleActivity;
+
 
 public class MainActivity extends Activity {
     ImageButton btnLifts;
@@ -52,6 +54,14 @@ public class MainActivity extends Activity {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(v.getContext(), LiftActivity.class);
+                startActivity(i);
+            }
+        });
+
+        btnSchedule.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(v.getContext(), ScheduleActivity.class);
                 startActivity(i);
             }
         });

@@ -20,6 +20,10 @@
             android:label="Lifting Section">
 
         </activity>
+        <activity android:name=".schedule.ScheduleActivity"
+            android:label="Schedule Section">
+
+        </activity>
     </application>
 
 </manifest>
