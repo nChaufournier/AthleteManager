@@ -1,4 +1,4 @@
-package com.sleepypirate.athletemanager;
+package com.sleepypirate.athletemanager.lifting;
 
 /**
  * Created by Nic on 1/7/2015.

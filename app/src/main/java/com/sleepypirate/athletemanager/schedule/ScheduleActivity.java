@@ -4,9 +4,16 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.CalendarView;
+import android.widget.ListView;
 import android.widget.Switch;
+import android.widget.Toast;
 
 import com.sleepypirate.athletemanager.R;
+
+import java.util.List;
 
 /**
  * This is the schedule activity. It is where you will be able to view your classes, on a calendar
@@ -16,13 +23,42 @@ import com.sleepypirate.athletemanager.R;
  */
 public class ScheduleActivity extends Activity{
 
+    ListView lvCalendar;
+    ArrayAdapter mHomeworkAdapter;
+    CalendarView calendarView;
+    private String[] arCalendarEvents = {
+            "Calc: Book Problems ",
+            "Ethics: Reading",
+            "Religion: Test Tomorrow",
+            "Religion: Reading",
+            "Networking: Program"
+
+    };
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.test_activity);
-
+        setContentView(R.layout.schedule_activity);
         //Used for Home Button
         getActionBar().setDisplayHomeAsUpEnabled(true);
+
+        mHomeworkAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, arCalendarEvents);
+        lvCalendar = (ListView)findViewById(R.id.lvCalendar);
+        calendarView = (CalendarView) findViewById(R.id.cvScheduleCalendar);
+        if(mHomeworkAdapter != null){
+            lvCalendar.setAdapter(mHomeworkAdapter);
+        }
+
+        calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
+            @Override
+            public void onSelectedDayChange(CalendarView view, int year, int month, int day) {
+                Toast.makeText(getApplicationContext(), month+1 + "/" + day + "/" + year, Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
+
     }
 
     @Override

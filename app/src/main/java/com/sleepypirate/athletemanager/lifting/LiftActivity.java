@@ -1,16 +1,15 @@
-package com.sleepypirate.athletemanager;
+package com.sleepypirate.athletemanager.lifting;
 
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.FragmentTransaction;
-import android.content.Intent;
 import android.os.Bundle;
-import android.support.v13.app.FragmentPagerAdapter;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
+
+import com.sleepypirate.athletemanager.R;
 
 /**
  * Lifting Activity shows creation of lifts plus past lifts

@@ -1,19 +1,16 @@
 package com.sleepypirate.athletemanager;
 
-import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.ListAdapter;
 import android.widget.ListView;
 
+import com.sleepypirate.athletemanager.lifting.LiftActivity;
 import com.sleepypirate.athletemanager.schedule.ScheduleActivity;
 
 

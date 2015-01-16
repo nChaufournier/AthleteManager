@@ -1,8 +1,11 @@
-package com.sleepypirate.athletemanager;
+package com.sleepypirate.athletemanager.lifting;
 
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.support.v13.app.FragmentPagerAdapter;
+
+import com.sleepypirate.athletemanager.TodayFragment;
+import com.sleepypirate.athletemanager.YesterdayFragment;
 
 /**
  * Created by Nic on 1/6/2015.
