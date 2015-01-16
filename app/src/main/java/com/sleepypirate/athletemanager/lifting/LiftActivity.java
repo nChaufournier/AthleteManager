@@ -88,7 +88,7 @@ public class LiftActivity extends Activity implements ActionBar.TabListener{
             case android.R.id.home:
                 finish();
                 return true;
-            case R.id.addLift:
+            case R.id.addItem:
                 Toast.makeText(this, "Add a Lift!", Toast.LENGTH_LONG).show();
                 return true;
         }
