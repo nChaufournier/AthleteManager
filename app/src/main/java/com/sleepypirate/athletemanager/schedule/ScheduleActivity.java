@@ -88,6 +88,7 @@ public class ScheduleActivity extends Activity{
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_lift, menu);
         return super.onCreateOptionsMenu(menu);
 
     }
@@ -97,6 +98,9 @@ public class ScheduleActivity extends Activity{
         switch (item.getItemId()){
             case android.R.id.home:
                 finish();
+                return true;
+            case R.id.addItem:
+                Toast.makeText(getApplicationContext(), "Add an Event", Toast.LENGTH_SHORT).show();
                 return true;
         }
         return super.onOptionsItemSelected(item);
