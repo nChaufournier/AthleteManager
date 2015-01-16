@@ -1,6 +1,9 @@
 package com.sleepypirate.athletemanager.schedule;
 
 import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -31,6 +34,7 @@ public class ScheduleActivity extends Activity{
     ImageButton expandListView;
     ImageButton collapseListView;
     RelativeLayout calBottomRL;
+    SQLiteDatabase db;
     private String[] arCalendarEvents = {
             "Calc: Book Problems ",
             "Ethics: Reading",
@@ -83,6 +87,9 @@ public class ScheduleActivity extends Activity{
         });
 
 
+        //Database Information
+        //db = openOrCreateDatabase("ScheduleDB", Context.MODE_PRIVATE, null);
+        //db.execSQL("CREATE TABLE IF NOT EXISTS schedule(key INT, eventName VARCHAR, type VARCHAR, date DATE, note VARCHAR");
 
     }
 
@@ -100,7 +107,8 @@ public class ScheduleActivity extends Activity{
                 finish();
                 return true;
             case R.id.addItem:
-                Toast.makeText(getApplicationContext(), "Add an Event", Toast.LENGTH_SHORT).show();
+                Intent i = new Intent(getApplicationContext(), AddEvent.class);
+                startActivity(i);
                 return true;
         }
         return super.onOptionsItemSelected(item);

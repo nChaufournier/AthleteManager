@@ -6,4 +6,13 @@
     <string name="action_settings">Settings</string>
     <string name="primaryColor">#F44336</string>
 
+    <string-array name="event_type">
+        <item>Homework</item>
+        <item>Reading</item>
+        <item>Paper</item>
+        <item>Test</item>
+        <item>Final</item>
+
+    </string-array>
+
 </resources>

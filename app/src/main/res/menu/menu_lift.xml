@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item  android:title="addLift"
-        android:id="@+id/addLift"
-        android:icon="@drawable/ic_note_add_white_24dp"
-        android:showAsAction="always|withText"/>
+    <item  android:title="addItem"
+        android:id="@+id/addItem"
+        android:icon="@drawable/ic_note_add_white"
+        android:showAsAction="ifRoom"/>
 
 
 </menu>
