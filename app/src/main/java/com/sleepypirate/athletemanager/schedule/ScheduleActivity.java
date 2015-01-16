@@ -7,7 +7,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.CalendarView;
+import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.Switch;
 import android.widget.Toast;
 
@@ -26,6 +28,9 @@ public class ScheduleActivity extends Activity{
     ListView lvCalendar;
     ArrayAdapter mHomeworkAdapter;
     CalendarView calendarView;
+    ImageButton expandListView;
+    ImageButton collapseListView;
+    RelativeLayout calBottomRL;
     private String[] arCalendarEvents = {
             "Calc: Book Problems ",
             "Ethics: Reading",
@@ -53,7 +58,27 @@ public class ScheduleActivity extends Activity{
         calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
             public void onSelectedDayChange(CalendarView view, int year, int month, int day) {
-                Toast.makeText(getApplicationContext(), month+1 + "/" + day + "/" + year, Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), month + 1 + "/" + day + "/" + year, Toast.LENGTH_SHORT).show();
+            }
+        });
+        calBottomRL = (RelativeLayout) findViewById(R.id.calBottomRL);
+        expandListView = (ImageButton) findViewById(R.id.expandListView);
+        collapseListView = (ImageButton) findViewById(R.id.collapseListView);
+        expandListView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                calendarView.setVisibility(v.GONE);
+                collapseListView.setVisibility(v.VISIBLE);
+                expandListView.setVisibility(v.GONE);
+            }
+        });
+
+        collapseListView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                calendarView.setVisibility(v.VISIBLE);
+                collapseListView.setVisibility(v.GONE);
+                expandListView.setVisibility(v.VISIBLE);
             }
         });
 
