@@ -5,6 +5,8 @@
         <!-- Customize your theme here. -->
         <item name="android:colorPrimaryDark">#F44336</item>
         <item name="android:colorPrimary">#F44336</item>
+        <item name="android:colorButtonNormal">#FFEB3B</item>
     </style>
+
 
 </resources>

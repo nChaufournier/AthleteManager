@@ -8,15 +8,20 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ArrayAdapter;
 import android.widget.CalendarView;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.Switch;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.sleepypirate.athletemanager.R;
+
+import org.w3c.dom.Text;
 
 import java.util.List;
 
@@ -34,6 +39,10 @@ public class ScheduleActivity extends Activity{
     ImageButton expandListView;
     ImageButton collapseListView;
     RelativeLayout calBottomRL;
+    Animation animSlideDown;
+    Animation animSlideUp;
+    Animation animMoveUp;
+    Animation animTest;
     SQLiteDatabase db;
     private String[] arCalendarEvents = {
             "Calc: Book Problems ",
@@ -68,21 +77,32 @@ public class ScheduleActivity extends Activity{
         calBottomRL = (RelativeLayout) findViewById(R.id.calBottomRL);
         expandListView = (ImageButton) findViewById(R.id.expandListView);
         collapseListView = (ImageButton) findViewById(R.id.collapseListView);
+
+
+        animSlideUp = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.move);
+        animMoveUp = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.abc_slide_out_top);
         expandListView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                calendarView.startAnimation(animMoveUp);
+                calBottomRL.startAnimation(animSlideUp);
                 calendarView.setVisibility(v.GONE);
                 collapseListView.setVisibility(v.VISIBLE);
                 expandListView.setVisibility(v.GONE);
             }
         });
-
+        animSlideDown = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.abc_slide_in_top);
+        animTest = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.movedown);
         collapseListView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                calendarView.startAnimation(animSlideDown);
                 calendarView.setVisibility(v.VISIBLE);
+                calBottomRL.startAnimation(animSlideDown);
                 collapseListView.setVisibility(v.GONE);
                 expandListView.setVisibility(v.VISIBLE);
+
             }
         });
 
@@ -107,6 +127,8 @@ public class ScheduleActivity extends Activity{
                 finish();
                 return true;
             case R.id.addItem:
+                animTest = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.abc_fade_in);
+
                 Intent i = new Intent(getApplicationContext(), AddEvent.class);
                 startActivity(i);
                 return true;
