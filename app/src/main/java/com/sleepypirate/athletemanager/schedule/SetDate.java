@@ -46,4 +46,5 @@ public class SetDate implements View.OnFocusChangeListener, DatePickerDialog.OnD
                     myCalendar.get(Calendar.DAY_OF_MONTH)).show();
         }
     }
+
 }

@@ -2,11 +2,15 @@ package com.sleepypirate.athletemanager.schedule;
 
 import android.app.Activity;
 import android.app.DatePickerDialog;
+import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -25,21 +29,12 @@ public class AddEvent extends Activity{
     Spinner typeSpinner;
     EditText name;
     EditText pickDate;
+    Button btnSave;
+    String spinerText;
+    SQLiteDatabase db;
+    Calendar myCal;
 
     Calendar myCalendar = Calendar.getInstance();
-    /*DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener(){
-        @Override
-        public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-            myCalendar.set(Calendar.YEAR, year);
-            myCalendar.set(Calendar.MONTH, monthOfYear);
-            myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-            updateLabel();
-        }
-    };*/
-    /*public void onClick(View v) {
-        DatePickerDialog dialog = new DatePickerDialog(this, this, 2015, 1, 16);
-        dialog.show();
-    }*/
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,16 +47,30 @@ public class AddEvent extends Activity{
         pickDate = (EditText) findViewById(R.id.dpPickDate);
         name = (EditText) findViewById(R.id.etEventName);
         typeSpinner = (Spinner) findViewById(R.id.spinType);
+        btnSave = (Button) findViewById(R.id.btnEventSave);
+
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
                 R.array.event_type, R.layout.test_activity);
+
         //Specify the layout to use when the list of choices appears
         adapter.setDropDownViewResource(R.layout.test_activity);
         //Apply the adapter to the spinner
         typeSpinner.setAdapter(adapter);
 
 
+        //Set the date in a spinner type fashion
         SetDate fromDate = new SetDate(pickDate, this);
 
+        spinerText = fromDate.toString();
+
+        db=openOrCreateDatabase("StudentDB", Context.MODE_PRIVATE, null);
+        btnSave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //db.execSQL("INSERT INTO ScheduleDB VALUES('"+);
+                Toast.makeText(getApplicationContext(), spinerText, Toast.LENGTH_SHORT).show();
+            }
+        });
 
     }
 
