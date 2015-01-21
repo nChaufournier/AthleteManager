@@ -111,7 +111,7 @@ public class ScheduleActivity extends Activity{
 
         //Database Information
         db = openOrCreateDatabase("ScheduleDB", Context.MODE_PRIVATE, null);
-        db.execSQL("CREATE TABLE IF NOT EXISTS schedule(key INT,eventName VARCHAR,type VARCHAR,date DATE,note VARCHAR);");
+        db.execSQL("CREATE TABLE IF NOT EXISTS schedule(key INTEGER PRIMARY KEY,eventName TEXT,type TEXT,date INTEGER,note TEXT);");
 
     }
 

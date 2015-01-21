@@ -29,8 +29,10 @@ public class AddEvent extends Activity{
     Spinner typeSpinner;
     EditText name;
     EditText pickDate;
+    EditText note;
     Button btnSave;
-    String spinerText;
+    String calText;
+    String spinText;
     SQLiteDatabase db;
     Calendar myCal;
 
@@ -48,7 +50,7 @@ public class AddEvent extends Activity{
         name = (EditText) findViewById(R.id.etEventName);
         typeSpinner = (Spinner) findViewById(R.id.spinType);
         btnSave = (Button) findViewById(R.id.btnEventSave);
-
+        note = (EditText) findViewById(R.id.etNote);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
                 R.array.event_type, R.layout.test_activity);
 
@@ -56,19 +58,20 @@ public class AddEvent extends Activity{
         adapter.setDropDownViewResource(R.layout.test_activity);
         //Apply the adapter to the spinner
         typeSpinner.setAdapter(adapter);
-
+        spinText = typeSpinner.getSelectedItem().toString();
 
         //Set the date in a spinner type fashion
         SetDate fromDate = new SetDate(pickDate, this);
+        calText = pickDate.getText().toString();
 
-        spinerText = fromDate.toString();
 
         db=openOrCreateDatabase("StudentDB", Context.MODE_PRIVATE, null);
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //db.execSQL("INSERT INTO ScheduleDB VALUES('"+);
-                Toast.makeText(getApplicationContext(), spinerText, Toast.LENGTH_SHORT).show();
+                db.execSQL("INSERT INTO schedule VALUES('"+ null +"','"+ name.getText()+ "','" + spinText+"','"+pickDate.getText().toString()+"','"+note.getText()+"');");
+                Log.e("CALTEXT:", pickDate.getText().toString());
+                Toast.makeText(getApplicationContext(), spinText, Toast.LENGTH_SHORT).show();
             }
         });
 
