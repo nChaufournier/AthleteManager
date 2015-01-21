@@ -1,8 +1,10 @@
 package com.sleepypirate.athletemanager.schedule;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Log;
@@ -31,8 +33,10 @@ public class AddEvent extends Activity{
     EditText pickDate;
     EditText note;
     Button btnSave;
+    Button btnView;
     String calText;
     String spinText;
+
     SQLiteDatabase db;
     Calendar myCal;
 
@@ -50,6 +54,8 @@ public class AddEvent extends Activity{
         name = (EditText) findViewById(R.id.etEventName);
         typeSpinner = (Spinner) findViewById(R.id.spinType);
         btnSave = (Button) findViewById(R.id.btnEventSave);
+        btnView = (Button) findViewById(R.id.btnViewRecords);
+
         note = (EditText) findViewById(R.id.etNote);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
                 R.array.event_type, R.layout.test_activity);
@@ -66,15 +72,41 @@ public class AddEvent extends Activity{
 
 
         db=openOrCreateDatabase("StudentDB", Context.MODE_PRIVATE, null);
+        db.execSQL("CREATE TABLE IF NOT EXISTS schedule(" +
+                "eventName TEXT," +
+                "type TEXT," +
+                "date TEXT," +
+                "note TEXT);");
+
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                db.execSQL("INSERT INTO schedule VALUES('"+ null +"','"+ name.getText()+ "','" + spinText+"','"+pickDate.getText().toString()+"','"+note.getText()+"');");
+                db.execSQL("INSERT INTO schedule VALUES('"+name.getText()+ "','" + spinText+"','"+pickDate.getText().toString()+"','"+note.getText()+"');");
                 Log.e("CALTEXT:", pickDate.getText().toString());
                 Toast.makeText(getApplicationContext(), spinText, Toast.LENGTH_SHORT).show();
+
+
+                showMessage("Working", "it Worked!");
             }
         });
 
+        //Cursor cur = db.query("schedule", null, null, null, null, null, null);
+        //cur.moveToFirst();
+
+
+        btnView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Cursor c =db.rawQuery("SELECT * FROM schedule", null);
+                c.moveToFirst();
+                showMessage("Assignment", c.getString(0)+"\nType: " + c.getString(1)+"\nDate: "+
+                        c.getString(2)+"\nNote: "+c.getString(3));
+                c.close();
+
+            }
+        });
+        //cur.close();
     }
 
 
@@ -86,5 +118,14 @@ public class AddEvent extends Activity{
                 return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    public void showMessage(String title,String message)
+    {
+        AlertDialog.Builder builder=new AlertDialog.Builder(this);
+        builder.setCancelable(true);
+        builder.setTitle(title);
+        builder.setMessage(message);
+        builder.show();
     }
 }

@@ -1,8 +1,10 @@
 package com.sleepypirate.athletemanager.schedule;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.Menu;
@@ -63,6 +65,11 @@ public class ScheduleActivity extends Activity{
         //Used for Home Button
         getActionBar().setDisplayHomeAsUpEnabled(true);
 
+        //Database Information
+        db = openOrCreateDatabase("ScheduleDB", Context.MODE_PRIVATE, null);
+        db.execSQL("CREATE TABLE IF NOT EXISTS schedule(eventName TEXT,type TEXT,date INTEGER,note TEXT);");
+
+
         mHomeworkAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, arCalendarEvents);
         lvCalendar = (ListView)findViewById(R.id.lvCalendar);
         calendarView = (CalendarView) findViewById(R.id.cvScheduleCalendar);
@@ -73,6 +80,12 @@ public class ScheduleActivity extends Activity{
         calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
             public void onSelectedDayChange(CalendarView view, int year, int month, int day) {
+
+                /*Cursor c =db.rawQuery("SELECT * FROM schedule", null);
+                c.moveToFirst();
+                showMessage("Assignment", c.getString(0)+"\nType: " + c.getString(1)+"\nDate: "+
+                        c.getString(2)+"\nNote: "+c.getString(3));
+                c.close();*/
                 Toast.makeText(getApplicationContext(), month + 1 + "/" + day + "/" + year, Toast.LENGTH_SHORT).show();
             }
         });
@@ -109,9 +122,7 @@ public class ScheduleActivity extends Activity{
         });
 
 
-        //Database Information
-        db = openOrCreateDatabase("ScheduleDB", Context.MODE_PRIVATE, null);
-        db.execSQL("CREATE TABLE IF NOT EXISTS schedule(key INTEGER PRIMARY KEY,eventName TEXT,type TEXT,date INTEGER,note TEXT);");
+
 
     }
 
@@ -136,5 +147,14 @@ public class ScheduleActivity extends Activity{
                 return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    public void showMessage(String title,String message)
+    {
+        AlertDialog.Builder builder=new AlertDialog.Builder(this);
+        builder.setCancelable(true);
+        builder.setTitle(title);
+        builder.setMessage(message);
+        builder.show();
     }
 }

@@ -90,6 +90,16 @@
         android:elevation="2dp"
         android:textColor="#FFFFFF"
         android:background="#CCCCCC"/>
+     <Button
+         android:id="@+id/btnViewRecords"
+         android:text="View"
+         android:layout_below="@id/btnEventSave"
+         android:layout_width="fill_parent"
+         android:layout_height="wrap_content"
+         android:layout_marginTop="5dp"
+         android:elevation="2dp"
+         android:textColor="#FFFFFF"
+         android:background="#CCCCCC"/>
     </RelativeLayout>
 
 </RelativeLayout>
