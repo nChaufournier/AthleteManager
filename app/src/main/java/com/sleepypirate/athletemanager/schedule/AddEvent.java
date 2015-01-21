@@ -86,7 +86,11 @@ public class AddEvent extends Activity{
                 Toast.makeText(getApplicationContext(), spinText, Toast.LENGTH_SHORT).show();
 
 
-                showMessage("Working", "it Worked!");
+                Cursor c =db.rawQuery("SELECT * FROM schedule", null);
+                c.moveToLast();
+                showMessage("Assignment", c.getString(0)+"\nType: " + c.getString(1)+"\nDate: "+
+                        c.getString(2)+"\nNote: "+c.getString(3));
+                c.close();
             }
         });
 
