@@ -7,35 +7,27 @@ import java.util.Date;
  */
 public class Event {
 
-    String name;
-    String note;
-    Date dueDate;
+    private long id;
+    private String event;
 
-    public Event(String name) {
-        this.name = name;
+    public long getId() {
+        return id;
     }
 
-    public String getName() {
-        return name;
+    public void setId(long id) {
+        this.id = id;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public String getComment() {
+        return event;
     }
 
-    public String getNote() {
-        return note;
+    public void setComment(String comment) {
+        this.event = comment;
     }
 
-    public void setNote(String note) {
-        this.note = note;
-    }
-
-    public Date getDueDate() {
-        return dueDate;
-    }
-
-    public void setDueDate(Date dueDate) {
-        this.dueDate = dueDate;
+    @Override
+    public String toString() {
+        return event;
     }
 }

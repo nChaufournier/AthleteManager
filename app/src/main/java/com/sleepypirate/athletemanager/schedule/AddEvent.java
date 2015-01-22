@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -85,17 +86,18 @@ public class AddEvent extends Activity{
                 Log.e("CALTEXT:", pickDate.getText().toString());
                 Toast.makeText(getApplicationContext(), spinText, Toast.LENGTH_SHORT).show();
 
-
+                //Create a cursor to show the newly inputted event
                 Cursor c =db.rawQuery("SELECT * FROM schedule", null);
                 c.moveToLast();
                 showMessage("Assignment", c.getString(0)+"\nType: " + c.getString(1)+"\nDate: "+
                         c.getString(2)+"\nNote: "+c.getString(3));
                 c.close();
+
+                //Goes back to the scheduleActivity
+                Intent i = new Intent(getApplicationContext(), ScheduleActivity.class);
+                startActivity(i);
             }
         });
-
-        //Cursor cur = db.query("schedule", null, null, null, null, null, null);
-        //cur.moveToFirst();
 
 
         btnView.setOnClickListener(new View.OnClickListener() {
@@ -103,9 +105,16 @@ public class AddEvent extends Activity{
             public void onClick(View v) {
 
                 Cursor c =db.rawQuery("SELECT * FROM schedule", null);
+                if(c.getCount()==0){
+                    showMessage("Error", "No Records Found");
+                    return;
+                }
                 c.moveToFirst();
-                showMessage("Assignment", c.getString(0)+"\nType: " + c.getString(1)+"\nDate: "+
-                        c.getString(2)+"\nNote: "+c.getString(3));
+                while (c.moveToNext()){
+                    showMessage("Assignment", c.getString(0)+"\nType: " + c.getString(1)+"\nDate: "+
+                            c.getString(2)+"\nNote: "+c.getString(3));
+                }
+
                 c.close();
 
             }

@@ -4,18 +4,25 @@ import android.content.Context;
 import android.database.DatabaseErrorHandler;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 /**
  * This is a database class for SQLite and will hold all of the classes
  */
 public class ScheduleDB extends SQLiteOpenHelper{
-    private static final int DATABASE_VERSION = 2;
-    private static final String EVENTS_TABLE_NAME = "scheduelEvents";
-    private static final String DATABASE_NAME = "events";
-    /*private static final String EVENTS_TABLE_CREATE =
-                    "CREATE TABLE " + EVENTS_TABLE_NAME + " (" +
-                    KEY_WORD + " TEXT, " +
-                    KEY_DEFINITION + " TEXT);";*/
+    public static final String TABLE_COMMENTS = "comments";
+    public static final String COLUMN_ID = "_id";
+    public static final String COLUMN_COMMENT = "comment";
+
+    private static final String DATABASE_NAME = "comments.db";
+    private  static final int DATABASE_VERSION = 1;
+
+    //Database creation sql statement
+    private static final String DATABASE_CREATE = "create table "
+            + TABLE_COMMENTS + "(" + COLUMN_ID
+            + " integer primary key autoincrement, " + COLUMN_COMMENT
+            + " text not null);";
+
 
     public ScheduleDB(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -24,11 +31,15 @@ public class ScheduleDB extends SQLiteOpenHelper{
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        //db.execSQL(EVENTS_TABLE_CREATE);
+        db.execSQL(DATABASE_CREATE);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-
+        Log.w(ScheduleDB.class.getName(),
+                "Upgrading database from version " + oldVersion + " to "
+                    + newVersion + ", which will destroy all old data");
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_COMMENTS);
+        onCreate(db);
     }
 }
