@@ -21,7 +21,7 @@ public class EventsDataSource {
     private SQLiteDatabase database;
     private ScheduleDB dbHelper;
     private String[] allColumns = {ScheduleDB.COLUMN_ID,
-        ScheduleDB.COLUMN_COMMENT };
+        ScheduleDB.COLUMN_EVENT };
 
     public EventsDataSource(Context context){
         dbHelper = new ScheduleDB(context);
@@ -35,11 +35,11 @@ public class EventsDataSource {
         dbHelper.close();
     }
 
-    public Event createEvent(String comment) {
+    public Event createEvent(String event) {
         ContentValues values = new ContentValues();
-        values.put(ScheduleDB.COLUMN_COMMENT, comment);
-        long insertId = database.insert(ScheduleDB.TABLE_COMMENTS, null, values);
-        Cursor cursor = database.query(ScheduleDB.TABLE_COMMENTS,
+        values.put(ScheduleDB.COLUMN_EVENT, event);
+        long insertId = database.insert(ScheduleDB.TABLE_EVENTS, null, values);
+        Cursor cursor = database.query(ScheduleDB.TABLE_EVENTS,
                 allColumns, ScheduleDB.COLUMN_ID + " = " + insertId, null,
                 null, null, null);
         cursor.moveToFirst();
@@ -48,17 +48,17 @@ public class EventsDataSource {
         return newEvent;
     }
 
-    public void deleteComment(Event event){
+    public void deleteEvent(Event event){
         long id = event.getId();
         System.out.println("Comment deleted with id: " + id);
-        database.delete(ScheduleDB.TABLE_COMMENTS, ScheduleDB.COLUMN_ID + " = " +
+        database.delete(ScheduleDB.TABLE_EVENTS, ScheduleDB.COLUMN_ID + " = " +
                 id, null);
     }
 
     public List<Event> getAllEvents() {
         List<Event> events = new ArrayList<Event>();
 
-        Cursor cursor = database.query(ScheduleDB.TABLE_COMMENTS,
+        Cursor cursor = database.query(ScheduleDB.TABLE_EVENTS,
                 allColumns, null, null, null, null, null);
 
         cursor.moveToFirst();

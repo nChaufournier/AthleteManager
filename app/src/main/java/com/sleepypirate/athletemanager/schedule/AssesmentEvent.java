@@ -12,7 +12,7 @@ public class AssesmentEvent extends Event {
     String note;
     int grade;
     public AssesmentEvent(String name) {
-        super(name);
+        super();
     }
 
     public String getType() {
@@ -39,12 +39,12 @@ public class AssesmentEvent extends Event {
         this.schoolClass = schoolClass;
     }
 
-    @Override
+
     public String getNote() {
         return note;
     }
 
-    @Override
+
     public void setNote(String note) {
         this.note = note;
     }

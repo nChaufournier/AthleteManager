@@ -12,7 +12,7 @@ public class ClassEvent extends Event {
     int repetitions;
 
     public ClassEvent(String name) {
-        super(name);
+        super();
     }
 
     public String getTeacher() {

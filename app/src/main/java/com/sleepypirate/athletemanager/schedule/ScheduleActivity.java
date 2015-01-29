@@ -96,6 +96,7 @@ public class ScheduleActivity extends Activity{
 
         animSlideUp = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.move);
         animMoveUp = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.abc_slide_out_top);
+
         expandListView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

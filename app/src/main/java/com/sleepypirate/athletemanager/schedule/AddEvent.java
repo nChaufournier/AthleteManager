@@ -3,6 +3,7 @@ package com.sleepypirate.athletemanager.schedule;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.app.ListActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
@@ -19,26 +20,32 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.sleepypirate.athletemanager.Databases.EventsDataSource;
 import com.sleepypirate.athletemanager.R;
 
+import java.lang.reflect.Array;
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.List;
 import java.util.Locale;
+import java.util.Random;
 
 /**
  * AddEvents from this page
  */
-public class AddEvent extends Activity{
-    Spinner typeSpinner;
-    EditText name;
-    EditText pickDate;
-    EditText note;
-    Button btnSave;
-    Button btnView;
-    String calText;
-    String spinText;
+public class AddEvent extends Activity {
+    private Spinner typeSpinner;
+    private EditText name;
+    private EditText pickDate;
+    private EditText note;
+    private Button btnSave;
+    private Button btnView;
+    private String calText;
+    private String spinText;
 
-    SQLiteDatabase db;
+    private EventsDataSource dataSource;
+    //SQLiteDatabase db;
     Calendar myCal;
 
     Calendar myCalendar = Calendar.getInstance();
@@ -58,20 +65,36 @@ public class AddEvent extends Activity{
         btnView = (Button) findViewById(R.id.btnViewRecords);
 
         note = (EditText) findViewById(R.id.etNote);
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+        ArrayAdapter<CharSequence> ddAdapter = ArrayAdapter.createFromResource(this,
                 R.array.event_type, R.layout.test_activity);
 
         //Specify the layout to use when the list of choices appears
-        adapter.setDropDownViewResource(R.layout.test_activity);
+        ddAdapter.setDropDownViewResource(R.layout.test_activity);
         //Apply the adapter to the spinner
-        typeSpinner.setAdapter(adapter);
+        typeSpinner.setAdapter(ddAdapter);
         spinText = typeSpinner.getSelectedItem().toString();
 
         //Set the date in a spinner type fashion
         SetDate fromDate = new SetDate(pickDate, this);
         calText = pickDate.getText().toString();
 
+        //Database stuff
+        /*dataSource = new EventsDataSource(this);
+        //Try catch not part of tutorial might be a problem in future
+        try {
+            dataSource.open();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        */
 
+
+        /*List<Event> values = dataSource.getAllEvents();
+        ArrayAdapter<Event> adapter = new ArrayAdapter<Event>(this,
+                android.R.layout.simple_list_item_1, values);
+        setListAdapter(adapter);*/
+
+        /* Old databse stuff. Only works in create vent
         db=openOrCreateDatabase("StudentDB", Context.MODE_PRIVATE, null);
         db.execSQL("CREATE TABLE IF NOT EXISTS schedule(" +
                 "eventName TEXT," +
@@ -118,11 +141,28 @@ public class AddEvent extends Activity{
                 c.close();
 
             }
-        });
+        });*/
         //cur.close();
     }
 
+    public void onClick(View view){
+    }
 
+    /*protected void onResume(){
+        try {
+            dataSource.open();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        super.onResume();
+    }
+
+    @Override
+    protected void onPause() {
+        dataSource.close();
+        super.onPause();
+    }
+*/
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
