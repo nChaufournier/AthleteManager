@@ -21,6 +21,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.sleepypirate.athletemanager.Databases.EventsDataSource;
+import com.sleepypirate.athletemanager.Databases.ScheduleDB;
 import com.sleepypirate.athletemanager.R;
 
 import java.lang.reflect.Array;
@@ -43,9 +44,9 @@ public class AddEvent extends Activity {
     private Button btnView;
     private String calText;
     private String spinText;
-
-    private EventsDataSource dataSource;
     //SQLiteDatabase db;
+    ScheduleDB db = new ScheduleDB(this);
+
     Calendar myCal;
 
     Calendar myCalendar = Calendar.getInstance();
@@ -54,6 +55,9 @@ public class AddEvent extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.event_creation);
+
+
+
         //Used for Home Button
         getActionBar().setDisplayHomeAsUpEnabled(true);
 
@@ -78,23 +82,46 @@ public class AddEvent extends Activity {
         SetDate fromDate = new SetDate(pickDate, this);
         calText = pickDate.getText().toString();
 
-        //Database stuff
-        /*dataSource = new EventsDataSource(this);
-        //Try catch not part of tutorial might be a problem in future
-        try {
-            dataSource.open();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        */
+
+        btnSave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Event newEvent= new Event();
+                newEvent.setName(name.getText().toString());
+                newEvent.setType(spinText);
+                newEvent.setDate(pickDate.getText().toString());
+                newEvent.setNote(note.getText().toString());
+                db.addEvent(newEvent);
+
+                //Goes back to the scheduleActivity
+                Intent i = new Intent(getApplicationContext(), ScheduleActivity.class);
+                startActivity(i);
+            }
+        });
+
+        btnView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                showMessage("All Items", db.getAllEvents().toString());
+
+            }
+        });
 
 
-        /*List<Event> values = dataSource.getAllEvents();
-        ArrayAdapter<Event> adapter = new ArrayAdapter<Event>(this,
-                android.R.layout.simple_list_item_1, values);
-        setListAdapter(adapter);*/
 
-        /* Old databse stuff. Only works in create vent
+
+
+
+
+
+
+
+
+
+
+
+        /* Old database stuff. Only works in create vent
         db=openOrCreateDatabase("StudentDB", Context.MODE_PRIVATE, null);
         db.execSQL("CREATE TABLE IF NOT EXISTS schedule(" +
                 "eventName TEXT," +

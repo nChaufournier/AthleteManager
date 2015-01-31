@@ -7,27 +7,51 @@ import java.util.Date;
  */
 public class Event {
 
-    private long id;
-    private String event;
+    private String name;
+    private String type;
+    private String date;
+    private String note;
 
-    public long getId() {
-        return id;
+    public String getNote() {
+        return note;
     }
 
-    public void setId(long id) {
-        this.id = id;
+    public void setNote(String note) {
+        this.note = note;
     }
 
-    public String getComment() {
-        return event;
+    public String getDate() {
+        return date;
     }
 
-    public void setComment(String comment) {
-        this.event = comment;
+    public void setDate(String date) {
+        this.date = date;
     }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+
+
 
     @Override
     public String toString() {
-        return event;
+        return "\nName: " + name
+                +"\nType: " + type
+                +"\nData: " +date
+                +"\nNote: " + note;
     }
 }

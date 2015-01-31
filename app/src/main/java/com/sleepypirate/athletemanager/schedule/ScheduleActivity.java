@@ -21,6 +21,7 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.sleepypirate.athletemanager.Databases.ScheduleDB;
 import com.sleepypirate.athletemanager.R;
 
 import org.w3c.dom.Text;
@@ -47,7 +48,7 @@ public class ScheduleActivity extends Activity{
     Animation animTest;
 
 
-    SQLiteDatabase db;
+    ScheduleDB db;
     private String[] arCalendarEvents = {
             "Calc: Book Problems ",
             "Ethics: Reading",
@@ -65,9 +66,11 @@ public class ScheduleActivity extends Activity{
         //Used for Home Button
         getActionBar().setDisplayHomeAsUpEnabled(true);
 
-        //Database Information
+        /*Database Information
         db = openOrCreateDatabase("ScheduleDB", Context.MODE_PRIVATE, null);
         db.execSQL("CREATE TABLE IF NOT EXISTS schedule(eventName TEXT,type TEXT,date INTEGER,note TEXT);");
+        */
+
 
 
         mHomeworkAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, arCalendarEvents);
@@ -86,6 +89,12 @@ public class ScheduleActivity extends Activity{
                 showMessage("Assignment", c.getString(0)+"\nType: " + c.getString(1)+"\nDate: "+
                         c.getString(2)+"\nNote: "+c.getString(3));
                 c.close();*/
+                try{
+                    showMessage("Events", db.getAllEvents().toString());
+                }catch (NullPointerException e){
+                    showMessage("Error", "Not Working!");
+                }
+
                 Toast.makeText(getApplicationContext(), month + 1 + "/" + day + "/" + year, Toast.LENGTH_SHORT).show();
             }
         });
@@ -121,10 +130,6 @@ public class ScheduleActivity extends Activity{
 
             }
         });
-
-
-
-
     }
 
     @Override
