@@ -86,16 +86,21 @@ public class AddEvent extends Activity {
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Event newEvent= new Event();
-                newEvent.setName(name.getText().toString());
-                newEvent.setType(spinText);
-                newEvent.setDate(pickDate.getText().toString());
-                newEvent.setNote(note.getText().toString());
-                db.addEvent(newEvent);
 
-                //Goes back to the scheduleActivity
-                Intent i = new Intent(getApplicationContext(), ScheduleActivity.class);
-                startActivity(i);
+                if(name != null && pickDate != null) {
+                    Event newEvent = new Event();
+                    newEvent.setName(name.getText().toString());
+                    newEvent.setType(spinText);
+                    newEvent.setDate(pickDate.getText().toString());
+                    newEvent.setNote(note.getText().toString());
+                    db.addEvent(newEvent);
+
+                    //Goes back to the scheduleActivity
+                    Intent i = new Intent(getApplicationContext(), ScheduleActivity.class);
+                    startActivity(i);
+                }else{
+                    showMessage("Error", "Please add either a Name or Date");
+                }
             }
         });
 

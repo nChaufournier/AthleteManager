@@ -19,7 +19,7 @@ public class ScheduleDB extends SQLiteOpenHelper{
     private static final String DATABASE_NAME = "schedule.db";
     private  static final int DATABASE_VERSION = 1;
 
-    //Schedule table name
+    //Table Name Schedule
     public static final String TABLE_SCHEDULE = "events";
 
     //Schedule Table Columns names

@@ -46,6 +46,7 @@ public class ScheduleActivity extends Activity{
     Animation animSlideUp;
     Animation animMoveUp;
     Animation animTest;
+    RelativeLayout rlSchedule;
 
 
     ScheduleDB db;
@@ -102,6 +103,8 @@ public class ScheduleActivity extends Activity{
         expandListView = (ImageButton) findViewById(R.id.expandListView);
         collapseListView = (ImageButton) findViewById(R.id.collapseListView);
 
+        rlSchedule = (RelativeLayout) findViewById(R.id.rlSchedule);
+
 
         animSlideUp = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.move);
         animMoveUp = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.abc_slide_out_top);
@@ -110,8 +113,9 @@ public class ScheduleActivity extends Activity{
             @Override
             public void onClick(View v) {
 
-                calendarView.startAnimation(animMoveUp);
-                calBottomRL.startAnimation(animSlideUp);
+                /*calendarView.startAnimation(animMoveUp);
+                calBottomRL.startAnimation(animSlideUp);*/
+                rlSchedule.startAnimation(animSlideUp);
                 calendarView.setVisibility(v.GONE);
                 collapseListView.setVisibility(v.VISIBLE);
                 expandListView.setVisibility(v.GONE);
