@@ -23,11 +23,11 @@ public class ScheduleDB extends SQLiteOpenHelper{
     public static final String TABLE_SCHEDULE = "events";
 
     //Schedule Table Columns names
-    private static final String KEY_NAME = "name";
+    private static final String KEY_ID = "id";
+    private static final String KEY_NAME = "eventName";
     private static final String KEY_TYPE = "type";
     private static final String KEY_DATE = "date";
     private static final String KEY_NOTE = "note";
-    private static final String[] COLUMNS = {KEY_NAME,KEY_TYPE,KEY_DATE,KEY_NOTE};
 
 
     public ScheduleDB(Context context) {
@@ -36,11 +36,12 @@ public class ScheduleDB extends SQLiteOpenHelper{
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String DATABASE_CREATE = "CREATE TABLE events("
-                + "eventName TEXT," +
-                "type TEXT," +
-                "date TEXT," +
-                "note TEXT);";
+        String DATABASE_CREATE = "CREATE TABLE "+TABLE_SCHEDULE +"("
+                + KEY_ID + " INTEGER PRIMARY KEY, "
+                + KEY_NAME + " TEXT,"
+                + KEY_TYPE + " TEXT,"
+                + KEY_DATE + " TEXT,"
+                + KEY_NOTE + " TEXT);";
         db.execSQL(DATABASE_CREATE);
 
 
@@ -56,14 +57,14 @@ public class ScheduleDB extends SQLiteOpenHelper{
         this.onCreate(db);
     }
 
-    //---------------------------Other Operations---------------------------------------------------
+    /*---------------------------Other Operations---------------------------------------------------
 
     public ScheduleDB openToRead() throws android.database.SQLException {
 
 
         return this;
     }
-
+    */
 
 
 
@@ -75,16 +76,41 @@ public class ScheduleDB extends SQLiteOpenHelper{
 
         //Get reference to writable DB
         SQLiteDatabase db = this.getWritableDatabase();
-
+        /* One way of inserting
         db.execSQL("INSERT INTO events VALUES('"+event.getName()+ "','" +event.getType()+"','"
                 +event.getDate()+"','"+event.getNote()+"');");
+        */
+        ContentValues values = new ContentValues();
+        values.put(KEY_NAME, event.getName());
+        values.put(KEY_TYPE, event.getType());
+        values.put(KEY_DATE, event.getDate());
+        values.put(KEY_NOTE, event.getNote());
+
+        db.insert(TABLE_SCHEDULE, null, values);
+
 
         //Close
         db.close();
     }
 
+    public Event getEvent(int id){
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.query(TABLE_SCHEDULE, new String[]{KEY_ID,
+                        KEY_NAME, KEY_TYPE, KEY_DATE, KEY_NOTE }, KEY_ID + "=?",
+                new String[]{ String.valueOf(id) }, null, null, null, null);
+        if(cursor != null){
+            cursor.moveToFirst();
+        }
+
+        Event event = new Event(Integer.parseInt(cursor.getString(0)),
+                cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getString(4));
+
+        return event;
+
+    }
+
     public List<Event> getAllEvents(){
-        List<Event> events = new LinkedList<Event>();
+        List<Event> events = new LinkedList<>();
 
         //Build Query
         String query="SELECT * FROM " + TABLE_SCHEDULE;
@@ -95,7 +121,7 @@ public class ScheduleDB extends SQLiteOpenHelper{
         Cursor cursor = db.rawQuery(query, null);
 
         //Go Over each row, build schedule and add it to list
-        Event event = null;
+        Event event;
         if(cursor.moveToFirst()){
             do{
                 event = new Event();

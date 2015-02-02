@@ -47,9 +47,6 @@ public class AddEvent extends Activity {
     //SQLiteDatabase db;
     ScheduleDB db = new ScheduleDB(this);
 
-    Calendar myCal;
-
-    Calendar myCalendar = Calendar.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -107,9 +104,7 @@ public class AddEvent extends Activity {
         btnView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 showMessage("All Items", db.getAllEvents().toString());
-
             }
         });
 
@@ -175,9 +170,6 @@ public class AddEvent extends Activity {
             }
         });*/
         //cur.close();
-    }
-
-    public void onClick(View view){
     }
 
     /*protected void onResume(){

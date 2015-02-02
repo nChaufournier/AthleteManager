@@ -1,16 +1,35 @@
 package com.sleepypirate.athletemanager.schedule;
 
-import java.util.Date;
-
 /**
- * Created by Nic on 1/15/2015.
+ * Event Object used for the schedule activities
  */
 public class Event {
-
+    private int _id;
     private String name;
     private String type;
     private String date;
     private String note;
+
+
+    public Event(){
+
+    }
+
+    public Event(int _id, String name, String type, String date, String note) {
+        this._id = _id;
+        this.name = name;
+        this.type = type;
+        this.date = date;
+        this.note = note;
+    }
+
+    public int get_id() {
+        return _id;
+    }
+
+    public void set_id(int _id) {
+        this._id = _id;
+    }
 
     public String getNote() {
         return note;
@@ -52,6 +71,7 @@ public class Event {
         return "\nName: " + name
                 +"\nType: " + type
                 +"\nData: " +date
-                +"\nNote: " + note;
+                +"\nNote: " + note
+                +"\n";
     }
 }
