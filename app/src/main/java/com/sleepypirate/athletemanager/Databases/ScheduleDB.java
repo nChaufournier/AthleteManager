@@ -102,7 +102,7 @@ public class ScheduleDB extends SQLiteOpenHelper{
             cursor.moveToFirst();
         }
 
-        Event event = new Event(Integer.parseInt(cursor.getString(0)),
+        Event event = new Event(Integer.parseInt(cursor.getString(id)),
                 cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getString(4));
 
         return event;
@@ -117,7 +117,7 @@ public class ScheduleDB extends SQLiteOpenHelper{
 
         //Get reference to writable DB
 
-        SQLiteDatabase db = this.getWritableDatabase();
+        SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(query, null);
 
         //Go Over each row, build schedule and add it to list
@@ -125,10 +125,10 @@ public class ScheduleDB extends SQLiteOpenHelper{
         if(cursor.moveToFirst()){
             do{
                 event = new Event();
-                event.setName(cursor.getString(0));
-                event.setType(cursor.getString(1));
-                event.setDate(cursor.getString(2));
-                event.setNote(cursor.getString(3));
+                event.setName(cursor.getString(1));
+                event.setType(cursor.getString(2));
+                event.setDate(cursor.getString(3));
+                event.setNote(cursor.getString(4));
                 events.add(event);
             }while (cursor.moveToNext());
         }

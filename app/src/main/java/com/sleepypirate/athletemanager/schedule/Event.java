@@ -70,7 +70,7 @@ public class Event {
     public String toString() {
         return "\nName: " + name
                 +"\nType: " + type
-                +"\nData: " +date
+                +"\nDate: " + date
                 +"\nNote: " + note
                 +"\n";
     }
