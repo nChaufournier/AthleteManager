@@ -105,7 +105,7 @@ public class AddEvent extends Activity {
             @Override
             public void onClick(View v) {
                 showMessage("All Items", db.getAllEvents().toString());
-                db.getEvent(0);
+                //db.getEvent(0);
             }
         });
 
