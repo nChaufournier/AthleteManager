@@ -27,6 +27,7 @@ import com.sleepypirate.athletemanager.R;
 
 import org.w3c.dom.Text;
 
+import java.sql.SQLException;
 import java.util.List;
 
 /**
@@ -67,13 +68,12 @@ public class ScheduleActivity extends Activity{
         setContentView(R.layout.schedule_activity);
         //Used for Home Button
         getActionBar().setDisplayHomeAsUpEnabled(true);
-
-        /*Database Information
-        db = openOrCreateDatabase("ScheduleDB", Context.MODE_PRIVATE, null);
-        db.execSQL("CREATE TABLE IF NOT EXISTS schedule(eventName TEXT,type TEXT,date INTEGER,note TEXT);");
-        */
-
-
+        db = new EventsDataSource(this);
+        try {
+            db.open();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
         mHomeworkAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, arCalendarEvents);
         lvCalendar = (ListView)findViewById(R.id.lvCalendar);
@@ -86,13 +86,8 @@ public class ScheduleActivity extends Activity{
             @Override
             public void onSelectedDayChange(CalendarView view, int year, int month, int day) {
 
-                /*Cursor c =db.rawQuery("SELECT * FROM schedule", null);
-                c.moveToFirst();
-                showMessage("Assignment", c.getString(0)+"\nType: " + c.getString(1)+"\nDate: "+
-                        c.getString(2)+"\nNote: "+c.getString(3));
-                c.close();*/
                 try{
-                    showMessage("Events", db.getAllEvents().toString());
+                    showMessage((month+1) +"/"+day+"/"+year, db.getAllEvents().toString());
                 }catch (NullPointerException e){
                     showMessage("Error", "Not Working!");
                 }
@@ -113,9 +108,6 @@ public class ScheduleActivity extends Activity{
         expandListView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                /*calendarView.startAnimation(animMoveUp);
-                calBottomRL.startAnimation(animSlideUp);*/
                 rlSchedule.startAnimation(animSlideUp);
                 calendarView.setVisibility(v.GONE);
                 collapseListView.setVisibility(v.VISIBLE);

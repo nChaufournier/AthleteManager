@@ -11,6 +11,7 @@
         android:layout_weight="1"
         android:textSize="30sp"
         android:gravity="center"
+        android:background="#F44336"
         android:textColor="#FFFFFF"/>
     <LinearLayout
         android:id="@+id/topButtonSection"
@@ -19,7 +20,7 @@
         android:layout_weight="1"
         android:orientation="horizontal"
         android:gravity="center_horizontal"
-        >
+        android:background="#F44336">
 
         <ImageButton
             android:id="@+id/btnLifts"
@@ -55,6 +56,7 @@
         <ListView
             android:id="@+id/lvUpdates"
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent"></ListView>
+            android:layout_height="fill_parent"
+            android:background="#FFFFFF"/>
         </RelativeLayout>
 </LinearLayout>

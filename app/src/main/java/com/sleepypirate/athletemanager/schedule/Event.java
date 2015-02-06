@@ -4,7 +4,7 @@ package com.sleepypirate.athletemanager.schedule;
  * Event Object used for the schedule activities
  */
 public class Event {
-    private int _id;
+    private long _id;
     private String name;
     private String type;
     private String date;
@@ -15,7 +15,7 @@ public class Event {
 
     }
 
-    public Event(int _id, String name, String type, String date, String note) {
+    public Event(long _id, String name, String type, String date, String note) {
         this._id = _id;
         this.name = name;
         this.type = type;
@@ -23,11 +23,11 @@ public class Event {
         this.note = note;
     }
 
-    public int get_id() {
+    public long get_id() {
         return _id;
     }
 
-    public void set_id(int _id) {
+    public void set_id(long _id) {
         this._id = _id;
     }
 

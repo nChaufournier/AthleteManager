@@ -47,9 +47,9 @@ public class EventsDataSource {
         values.put(ScheduleDB.KEY_DATE, event.getDate());
         values.put(ScheduleDB.KEY_NOTE, event.getNote());
 
-        //long insertId = database.insert(ScheduleDB.TABLE_SCHEDULE, null, values);
+        long insertId = database.insert(ScheduleDB.TABLE_SCHEDULE, null, values);
         Cursor cursor = database.query(ScheduleDB.TABLE_SCHEDULE,
-                allColumns,null, null, null, null, null);
+                allColumns,ScheduleDB.KEY_ID + " = " + insertId, null, null, null, null);
         cursor.moveToFirst();
         Event newEvent = cursorToEvent(cursor);
         cursor.close();
@@ -82,8 +82,11 @@ public class EventsDataSource {
 
     private Event cursorToEvent(Cursor cursor){
         Event event = new Event();
-        //event.setId(cursor.getLong(0));
-        //event.setComment(cursor.getString(1));
+        event.set_id(cursor.getLong(0));
+        event.setName(cursor.getString(1));
+        event.setType(cursor.getString(2));
+        event.setDate(cursor.getString(3));
+        event.setNote(cursor.getString(4));
         return event;
     }
 }

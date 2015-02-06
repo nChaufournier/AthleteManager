@@ -45,7 +45,7 @@ public class AddEvent extends Activity {
     private String calText;
     private String spinText;
     //SQLiteDatabase db;
-    EventsDataSource db = new EventsDataSource(this);
+    private EventsDataSource db;// = new EventsDataSource(this);
 
 
     @Override
@@ -53,7 +53,12 @@ public class AddEvent extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.event_creation);
 
-
+        db = new EventsDataSource(this);
+        try {
+            db.open();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
         //Used for Home Button
         getActionBar().setDisplayHomeAsUpEnabled(true);
