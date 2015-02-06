@@ -45,7 +45,7 @@ public class AddEvent extends Activity {
     private String calText;
     private String spinText;
     //SQLiteDatabase db;
-    ScheduleDB db = new ScheduleDB(this);
+    EventsDataSource db = new EventsDataSource(this);
 
 
     @Override
@@ -90,7 +90,7 @@ public class AddEvent extends Activity {
                     newEvent.setType(spinText);
                     newEvent.setDate(pickDate.getText().toString());
                     newEvent.setNote(note.getText().toString());
-                    db.addEvent(newEvent);
+                    db.createEvent(newEvent);
 
                     //Goes back to the scheduleActivity
                     Intent i = new Intent(getApplicationContext(), ScheduleActivity.class);

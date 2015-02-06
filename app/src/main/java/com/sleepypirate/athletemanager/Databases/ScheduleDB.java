@@ -23,11 +23,18 @@ public class ScheduleDB extends SQLiteOpenHelper{
     public static final String TABLE_SCHEDULE = "events";
 
     //Schedule Table Columns names
-    private static final String KEY_ID = "id";
-    private static final String KEY_NAME = "eventName";
-    private static final String KEY_TYPE = "type";
-    private static final String KEY_DATE = "date";
-    private static final String KEY_NOTE = "note";
+    public static final String KEY_ID = "id";
+    public static final String KEY_NAME = "eventName";
+    public static final String KEY_TYPE = "type";
+    public static final String KEY_DATE = "date";
+    public static final String KEY_NOTE = "note";
+
+    public static final String DATABASE_CREATE = "CREATE TABLE "+TABLE_SCHEDULE +"("
+            + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+            + KEY_NAME + " TEXT,"
+            + KEY_TYPE + " TEXT,"
+            + KEY_DATE + " TEXT,"
+            + KEY_NOTE + " TEXT);";
 
 
     public ScheduleDB(Context context) {
@@ -36,12 +43,6 @@ public class ScheduleDB extends SQLiteOpenHelper{
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String DATABASE_CREATE = "CREATE TABLE "+TABLE_SCHEDULE +"("
-                + KEY_ID + " INTEGER PRIMARY KEY, "
-                + KEY_NAME + " TEXT,"
-                + KEY_TYPE + " TEXT,"
-                + KEY_DATE + " TEXT,"
-                + KEY_NOTE + " TEXT);";
         db.execSQL(DATABASE_CREATE);
 
 
@@ -51,7 +52,7 @@ public class ScheduleDB extends SQLiteOpenHelper{
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         //Drop older schedule table if existed
-        db.execSQL("DROP TABLE IF EXISTS schedule");
+        db.execSQL("DROP TABLE IF EXISTS "+ TABLE_SCHEDULE);
 
         //create fresh schedule table
         this.onCreate(db);
@@ -70,16 +71,16 @@ public class ScheduleDB extends SQLiteOpenHelper{
 
     //----------------------------CRUD OPERATIONS---------------------------------------------------
 
-    public void addEvent(Event event){
+    /*public void addEvent(Event event){
         //for logging
         Log.d("addEvent", event.toString());
 
         //Get reference to writable DB
         SQLiteDatabase db = this.getWritableDatabase();
-        /* One way of inserting
+        //* One way of inserting
         db.execSQL("INSERT INTO events VALUES('"+event.getName()+ "','" +event.getType()+"','"
                 +event.getDate()+"','"+event.getNote()+"');");
-        */
+
         ContentValues values = new ContentValues();
         values.put(KEY_NAME, event.getName());
         values.put(KEY_TYPE, event.getType());
@@ -87,7 +88,7 @@ public class ScheduleDB extends SQLiteOpenHelper{
         values.put(KEY_NOTE, event.getNote());
 
         db.insert(TABLE_SCHEDULE, null, values);
-
+        /*
 
         //Close
         db.close();
@@ -136,7 +137,7 @@ public class ScheduleDB extends SQLiteOpenHelper{
         Log.d("getAllEvents()", events.toString());
 
         return events;
-    }
+    }*/
 
 
 

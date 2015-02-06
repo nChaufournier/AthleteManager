@@ -21,6 +21,7 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.sleepypirate.athletemanager.Databases.EventsDataSource;
 import com.sleepypirate.athletemanager.Databases.ScheduleDB;
 import com.sleepypirate.athletemanager.R;
 
@@ -49,7 +50,7 @@ public class ScheduleActivity extends Activity{
     RelativeLayout rlSchedule;
 
 
-    ScheduleDB db;
+    EventsDataSource db;
     private String[] arCalendarEvents = {
             "Calc: Book Problems ",
             "Ethics: Reading",

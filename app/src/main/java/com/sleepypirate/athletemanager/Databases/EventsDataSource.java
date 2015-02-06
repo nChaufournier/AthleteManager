@@ -20,8 +20,8 @@ public class EventsDataSource {
 
     private SQLiteDatabase database;
     private ScheduleDB dbHelper;
-    //private String[] allColumns = {
-    //    ScheduleDB.COLUMN_EVENT };
+    private String[] allColumns = { ScheduleDB.KEY_ID,
+        ScheduleDB.KEY_NAME, ScheduleDB.KEY_TYPE, ScheduleDB.KEY_DATE, ScheduleDB.KEY_NOTE };
 
     public EventsDataSource(Context context){
         dbHelper = new ScheduleDB(context);
@@ -35,19 +35,25 @@ public class EventsDataSource {
         dbHelper.close();
     }
 
-    public Event createEvent(String event) {
+    public Event createEvent(Event event) {
 
-       /* ContentValues values = new ContentValues();
-        values.put(ScheduleDB.COLUMN_EVENT, event);
-        long insertId = database.insert(ScheduleDB.TABLE_EVENTS, null, values);
-        Cursor cursor = database.query(ScheduleDB.TABLE_EVENTS,
-                allColumns, + " = " + insertId, null,
-                null, null, null);
+        /*database.execSQL("INSERT INTO "+ dbHelper.TABLE_SCHEDULE +
+            " VALUES ("+ null + event.getName() + ", " + event.getType() +
+                    ", " + event.getDate() + ", " + event.getNote()+");");*/
+
+        ContentValues values = new ContentValues();
+        values.put(ScheduleDB.KEY_NAME, event.getName());
+        values.put(ScheduleDB.KEY_TYPE, event.getType());
+        values.put(ScheduleDB.KEY_DATE, event.getDate());
+        values.put(ScheduleDB.KEY_NOTE, event.getNote());
+
+        //long insertId = database.insert(ScheduleDB.TABLE_SCHEDULE, null, values);
+        Cursor cursor = database.query(ScheduleDB.TABLE_SCHEDULE,
+                allColumns,null, null, null, null, null);
         cursor.moveToFirst();
         Event newEvent = cursorToEvent(cursor);
         cursor.close();
-        return newEvent;*/
-        Event newEvent = new Event();
+        //Event newEvent = new Event();
         return newEvent;
     }
 
@@ -57,11 +63,11 @@ public class EventsDataSource {
         //        id, null);
     }
 
-    /*public List<Event> getAllEvents() {
+    public List<Event> getAllEvents() {
         List<Event> events = new ArrayList<Event>();
 
-        //Cursor cursor = database.query(ScheduleDB.TABLE_EVENTS,
-         //       allColumns, null, null, null, null, null);
+        Cursor cursor = database.query(ScheduleDB.TABLE_SCHEDULE,
+               allColumns, null, null, null, null, null);
 
         cursor.moveToFirst();
         while(!cursor.isAfterLast()){
@@ -71,7 +77,7 @@ public class EventsDataSource {
         }
         cursor.close();
         return events;
-    }*/
+    }
 
 
     private Event cursorToEvent(Cursor cursor){
