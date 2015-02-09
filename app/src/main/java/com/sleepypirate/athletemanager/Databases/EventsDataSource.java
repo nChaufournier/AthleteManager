@@ -37,10 +37,6 @@ public class EventsDataSource {
 
     public Event createEvent(Event event) {
 
-        /*database.execSQL("INSERT INTO "+ dbHelper.TABLE_SCHEDULE +
-            " VALUES ("+ null + event.getName() + ", " + event.getType() +
-                    ", " + event.getDate() + ", " + event.getNote()+");");*/
-
         ContentValues values = new ContentValues();
         values.put(ScheduleDB.KEY_NAME, event.getName());
         values.put(ScheduleDB.KEY_TYPE, event.getType());
@@ -61,6 +57,22 @@ public class EventsDataSource {
         System.out.println("Comment deleted with id: ");
         //database.delete(ScheduleDB.TABLE_EVENTS, ScheduleDB.COLUMN_ID + " = " +
         //        id, null);
+    }
+
+    public Event getEventByDate(String date){
+        String selectQuery = "SELECT * FROM "+ ScheduleDB.TABLE_SCHEDULE+ " WHERE " + ScheduleDB.KEY_DATE+ " = '" + date+"';";
+        //database.execSQL("SELECT * FROM "+ ScheduleDB.TABLE_SCHEDULE+ " WHERE " + ScheduleDB.KEY_DATE+ " = " + date);
+        Cursor cursor = database.rawQuery(selectQuery, null);
+        cursor.moveToFirst();
+        if(cursor == null){
+
+        }else{
+            Event event = cursorToEvent(cursor);
+            return event;
+        }
+
+        cursor.close();
+        return null;
     }
 
     public List<Event> getAllEvents() {

@@ -43,7 +43,7 @@ public class MainActivity extends Activity {
         btnSchedule = (ImageButton) findViewById(R.id.btnSchedule);
         lvUpdates = (ListView) findViewById(R.id.lvUpdates);
 
-        mArrayAdapter = new ArrayAdapter(this, android.R.layout.test_list_item, recentAct);
+        mArrayAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, recentAct);
         if(lvUpdates !=null){
             lvUpdates.setAdapter(mArrayAdapter);
         }
