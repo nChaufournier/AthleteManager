@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import com.sleepypirate.athletemanager.schedule.Event;
 
@@ -22,6 +23,8 @@ public class EventsDataSource {
     private ScheduleDB dbHelper;
     private String[] allColumns = { ScheduleDB.KEY_ID,
         ScheduleDB.KEY_NAME, ScheduleDB.KEY_TYPE, ScheduleDB.KEY_DATE, ScheduleDB.KEY_NOTE };
+    private String[] showEvent = {ScheduleDB.KEY_ID,
+            ScheduleDB.KEY_NAME, ScheduleDB.KEY_TYPE};
 
     public EventsDataSource(Context context){
         dbHelper = new ScheduleDB(context);
@@ -59,20 +62,26 @@ public class EventsDataSource {
         //        id, null);
     }
 
-    public Event getEventByDate(String date){
-        String selectQuery = "SELECT * FROM "+ ScheduleDB.TABLE_SCHEDULE+ " WHERE " + ScheduleDB.KEY_DATE+ " = '" + date+"';";
-        //database.execSQL("SELECT * FROM "+ ScheduleDB.TABLE_SCHEDULE+ " WHERE " + ScheduleDB.KEY_DATE+ " = " + date);
-        Cursor cursor = database.rawQuery(selectQuery, null);
+    public List<Event> getEventByDate(String date){
+        List<Event> events = new ArrayList<Event>();
+                 //String selectQuery = "SELECT * FROM "+ ScheduleDB.TABLE_SCHEDULE+ " WHERE " + ScheduleDB.KEY_DATE+ " = '" + date+"';";
+        String selectDate = ScheduleDB.KEY_DATE+ " = '" + date+"'";
+        //Log.v("Date", selectDate);
+                //database.execSQL("SELECT * FROM "+ ScheduleDB.TABLE_SCHEDULE+ " WHERE " + ScheduleDB.KEY_DATE+ " = " + date);
+
+        //SELECT * FROM events WHERE date = 'date';
+        Cursor cursor = database.query(ScheduleDB.TABLE_SCHEDULE, showEvent, selectDate, null, null, null, null);
         cursor.moveToFirst();
-        if(cursor == null){
-
-        }else{
-            Event event = cursorToEvent(cursor);
-            return event;
+        while(!cursor.isAfterLast()){
+            Event event = new Event();
+            event.set_id(cursor.getLong(0));
+            event.setName(cursor.getString(1));
+            event.setType(cursor.getString(2));
+            events.add(event);
+            cursor.moveToNext();
         }
-
         cursor.close();
-        return null;
+        return events;
     }
 
     public List<Event> getAllEvents() {

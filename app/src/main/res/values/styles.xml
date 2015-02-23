@@ -4,11 +4,29 @@
     <style name="AppTheme" parent="android:style/Theme.Holo.Light">
         <!-- Customize your theme here. -->
         <item name="android:calendarViewStyle">@style/Calendar</item>
+        <item name="android:actionBarStyle">@style/MyActionBar</item>
+        <item name="android:actionMenuTextColor">#FFFFFF</item>
         <!--<item name="android:background">#F44336</item>
         <item name="android:colorPrimaryDark">#F44336</item>
         <item name="android:colorPrimary">#F44336</item>
         <item name="android:colorButtonNormal">#FFEB3B</item-->
     </style>
+    <!--style name="CustomActionBarTheme"
+        parent="android:style/Theme.Holo.Light.DarkActionBar">
+        <item name="android:actionBarStyle">@style/MyActionBar</item>
+    </style-->
+    <!--Action Bar Styles-->
+    <style name="MyActionBar"
+        parent="android:style/Widget.Holo.ActionBar">
+        <item name="android:background">#F44336</item>
+        <item name="android:titleTextStyle">@style/MyActionBarTitleText</item>
+    </style>
+    <!--ActionBar title text-->
+    <style name="MyActionBarTitleText"
+        parent="">
+        <item name="android:textColor">#FFFFFF</item>
+    </style>
+
 
     <style name="Calendar" parent="android:Widget.CalendarView">
         <item name="android:focusedMonthDateColor">#830922</item>

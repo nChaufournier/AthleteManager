@@ -67,7 +67,7 @@ public class AddEvent extends Activity {
         pickDate = (EditText) findViewById(R.id.dpPickDate);
         name = (EditText) findViewById(R.id.etEventName);
         typeSpinner = (Spinner) findViewById(R.id.spinType);
-        btnSave = (Button) findViewById(R.id.btnEventSave);
+        //btnSave = (Button) findViewById(R.id.btnEventSave);
         btnView = (Button) findViewById(R.id.btnViewRecords);
 
         note = (EditText) findViewById(R.id.etNote);
@@ -79,20 +79,21 @@ public class AddEvent extends Activity {
         //Apply the adapter to the spinner
         typeSpinner.setAdapter(ddAdapter);
         spinText = typeSpinner.getSelectedItem().toString();
+        //Toast.makeText(Toast)
 
         //Set the date in a spinner type fashion
         SetDate fromDate = new SetDate(pickDate, this);
         calText = pickDate.getText().toString();
 
 
-        btnSave.setOnClickListener(new View.OnClickListener() {
+        /*btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 if(name != null && pickDate != null) {
                     Event newEvent = new Event();
                     newEvent.setName(name.getText().toString());
-                    newEvent.setType(spinText);
+                    newEvent.setType(typeSpinner.getSelectedItem().toString());
                     newEvent.setDate(pickDate.getText().toString());
                     newEvent.setNote(note.getText().toString());
                     db.createEvent(newEvent);
@@ -100,82 +101,21 @@ public class AddEvent extends Activity {
                     //Goes back to the scheduleActivity
                     Intent i = new Intent(getApplicationContext(), ScheduleActivity.class);
                     startActivity(i);
+                    Toast.makeText(getApplicationContext(), "Event Created", Toast.LENGTH_LONG).show();
                 }else{
                     showMessage("Error", "Please add either a Name or Date");
                 }
             }
-        });
-
-        btnView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showMessage("All Items", db.getAllEvents().toString());
-                //db.getEvent(0);
-            }
-        });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        /* Old database stuff. Only works in create vent
-        db=openOrCreateDatabase("StudentDB", Context.MODE_PRIVATE, null);
-        db.execSQL("CREATE TABLE IF NOT EXISTS schedule(" +
-                "eventName TEXT," +
-                "type TEXT," +
-                "date TEXT," +
-                "note TEXT);");
-
-        btnSave.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                db.execSQL("INSERT INTO schedule VALUES('"+name.getText()+ "','" + spinText+"','"+pickDate.getText().toString()+"','"+note.getText()+"');");
-                Log.e("CALTEXT:", pickDate.getText().toString());
-                Toast.makeText(getApplicationContext(), spinText, Toast.LENGTH_SHORT).show();
-
-                //Create a cursor to show the newly inputted event
-                Cursor c =db.rawQuery("SELECT * FROM schedule", null);
-                c.moveToLast();
-                showMessage("Assignment", c.getString(0)+"\nType: " + c.getString(1)+"\nDate: "+
-                        c.getString(2)+"\nNote: "+c.getString(3));
-                c.close();
-
-                //Goes back to the scheduleActivity
-                Intent i = new Intent(getApplicationContext(), ScheduleActivity.class);
-                startActivity(i);
-            }
-        });
-
-
-        btnView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                Cursor c =db.rawQuery("SELECT * FROM schedule", null);
-                if(c.getCount()==0){
-                    showMessage("Error", "No Records Found");
-                    return;
-                }
-                c.moveToFirst();
-                while (c.moveToNext()){
-                    showMessage("Assignment", c.getString(0)+"\nType: " + c.getString(1)+"\nDate: "+
-                            c.getString(2)+"\nNote: "+c.getString(3));
-                }
-
-                c.close();
-
-            }
         });*/
-        //cur.close();
+
+        btnView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getApplicationContext(),  typeSpinner.getSelectedItem().toString(), Toast.LENGTH_LONG).show();
+                showMessage("All Items", db.getAllEvents().toString());
+            }
+        });
+
     }
 
     /*protected void onResume(){
@@ -193,12 +133,35 @@ public class AddEvent extends Activity {
         super.onPause();
     }
 */
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.save, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
             case android.R.id.home:
                 finish();
                 return true;
+            case R.id.mbtnSave:
+                if(name != null && pickDate != null) {
+                    Event newEvent = new Event();
+                    newEvent.setName(name.getText().toString());
+                    newEvent.setType(typeSpinner.getSelectedItem().toString());
+                    newEvent.setDate(pickDate.getText().toString());
+                    newEvent.setNote(note.getText().toString());
+                    db.createEvent(newEvent);
+
+                    //Goes back to the scheduleActivity
+                    Intent i = new Intent(getApplicationContext(), ScheduleActivity.class);
+                    startActivity(i);
+                    Toast.makeText(getApplicationContext(), "Event Created", Toast.LENGTH_LONG).show();
+                }else{
+                    showMessage("Error", "Please add either a Name or Date");
+                }
         }
         return super.onOptionsItemSelected(item);
     }

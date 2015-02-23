@@ -2,18 +2,18 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
+    android:theme="@style/AppTheme"
     android:background="#FFFFFF">
-    <TextView
+
+    <!--TextView
         android:id="@+id/tvEventTitle"
         android:text="Create an Event"
-        android:gravity="center"
         android:textSize="30sp"
         android:textColor="#FFFFFF"
         android:background="#F44336"
         android:padding="5dp"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content" /-->
     <RelativeLayout
         android:padding="15dp"
         android:layout_below="@+id/tvEventTitle"
@@ -69,7 +69,7 @@
         android:layout_marginBottom="10dp"/>
 
     <EditText
-        android:inputType="textCapSentences"
+        android:inputType="textCapSentences|textMultiLine"
         android:hint="Note:"
         android:gravity="top"
         android:textColor="#000000"
@@ -79,7 +79,7 @@
         android:layout_width="fill_parent"
         android:layout_height="200dp"
         android:background="#FFFFFF"/>
-    <Button
+    <!--Button
         android:text="Save"
         android:layout_centerHorizontal="true"
         android:layout_below="@id/etNote"
@@ -88,18 +88,18 @@
         android:layout_height="wrap_content"
         style="?android:attr/borderlessButtonStyle"
         android:elevation="2dp"
-        android:textColor="#FFFFFF"
-        android:background="#CCCCCC"/>
+        android:textColor="#FFEB3B"
+        android:background="#F44336"/-->
      <Button
          android:id="@+id/btnViewRecords"
          android:text="View"
-         android:layout_below="@id/btnEventSave"
+         android:layout_below="@id/etNote"
          android:layout_width="fill_parent"
          android:layout_height="wrap_content"
          android:layout_marginTop="5dp"
          android:elevation="2dp"
-         android:textColor="#FFFFFF"
-         android:background="#CCCCCC"/>
+         android:textColor="#F44336"
+         android:background="#FFEB3B"/>
     </RelativeLayout>
 
 </RelativeLayout>
