@@ -44,6 +44,7 @@ public class ScheduleActivity extends Activity {
     Animation animTest;
     TextView bottomDate;
     RelativeLayout rlSchedule;
+    ImageButton fabSchedule;
 
 
     EventsDataSource db;
@@ -94,38 +95,18 @@ public class ScheduleActivity extends Activity {
                 //This changes the bottom bar to what ever the selected date is
                 bottomDate.setText((month + 1) + "/" + day + "/" + (year-2000));
 
-                //db.getEventByDate((month + 1) + "/" + day + "/" + (year-2000));
-
                 //Checks if there is an event on the selected date
                 if(!db.getEventByDate(date).isEmpty()) {
-                    //Toast.makeText(getApplicationContext(), db.getEventByDate(date).toString(), Toast.LENGTH_LONG).show();
-                    /*showMessage("Events for " + date, "Read pages 1-10 Stephenson\n" +
-                            "Reading\n" +
-                            date + "\n" +
-                            "   This is where the note goes");//db.getEventByDate(date).toString());
-                    */
                     mHomeworkAdapter = new EventAdapter(getApplicationContext(), R.layout.schedulerow,  db.getEventByDate(date));
                     if (mHomeworkAdapter != null) {
                         lvCalendar.setAdapter(mHomeworkAdapter);
                     }
                 }
-                //Toast.makeText(getApplicationContext(), date, Toast.LENGTH_SHORT).show();
-
-
-
-                /*if (mHomeworkAdapter != null) {
-                    lvCalendar.setAdapter(mHomeworkAdapter);
-                }*/
-                //if()
             }
         });
 
-        //mHomeworkAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, arCalendarEvents);
 
-
-
-
-
+        //For Animations
         calBottomRL = (RelativeLayout) findViewById(R.id.calBottomRL);
         expandListView = (ImageButton) findViewById(R.id.expandListView);
         collapseListView = (ImageButton) findViewById(R.id.collapseListView);
@@ -152,6 +133,16 @@ public class ScheduleActivity extends Activity {
                     expandListView.setVisibility(v.VISIBLE);
                     up = false;
                 }
+            }
+        });
+
+        fabSchedule = (ImageButton) findViewById(R.id.fab_schedule);
+
+        fabSchedule.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getApplicationContext(), AddEvent.class);
+                startActivity(i);
             }
         });
 

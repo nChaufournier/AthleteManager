@@ -48,8 +48,23 @@
             android:layout_below="@+id/bottomDate"
             android:id="@+id/lvCalendar"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="fill_parent"
             android:background="#FFFFFF"/>
+
+        <ImageButton
+            style="@style/AppTheme"
+            android:id="@+id/fab_schedule"
+            android:elevation="10dp"
+            android:src="@drawable/ic_action_new"
+            android:background="@drawable/circle"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignBottom="@+id/lvCalendar"/>
 
     </RelativeLayout>
 
