@@ -22,7 +22,9 @@ import com.sleepypirate.athletemanager.MainActivity;
 import com.sleepypirate.athletemanager.R;
 
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -45,8 +47,10 @@ public class ScheduleActivity extends Activity {
     Animation animMoveUp;
     Animation animTest;
     TextView bottomDate;
+    TextView noEvent;
     RelativeLayout rlSchedule;
     ImageButton fabSchedule;
+    String today;
 
 
     EventsDataSource db;
@@ -78,13 +82,42 @@ public class ScheduleActivity extends Activity {
             e.printStackTrace();
         }
 
+
+
+
         calendarView = (CalendarView) findViewById(R.id.cvScheduleCalendar);
         lvCalendar = (ListView) findViewById(R.id.lvCalendar);
-
+        noEvent = (TextView) findViewById(R.id.tvNoEvent);
         bottomDate = (TextView) findViewById(R.id.bottomDate);
+
+
+        //Set the initial ListView When Activity is created
+        SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yy");
+        String selectedDate = sdf.format(new Date(calendarView.getDate()));
+        today = selectedDate;
+        Toast.makeText(this, selectedDate, Toast.LENGTH_SHORT).show();
+        if(!db.getEventByDate(selectedDate).isEmpty()) {
+            //lvCalendar.setVisibility(view.VISIBLE);
+            //noEvent.setVisibility(view.GONE);
+            mHomeworkAdapter = new EventAdapter(getApplicationContext(), R.layout.schedulerow,  db.getEventByDate(selectedDate));
+            if (mHomeworkAdapter != null) {
+                lvCalendar.setAdapter(mHomeworkAdapter);
+            }
+        }else{
+            //Toast.makeText(getApplicationContext(), "Should display 'No Event Add Event'", Toast.LENGTH_SHORT).show();
+            //lvCalendar.setVisibility(view.GONE);
+            //noEvent.setVisibility(view.VISIBLE);
+                    /*emptyAdapter = new ArrayAdapter(getApplicationContext(), android.R.layout.simple_list_item_1,  arCalendarEvents2);
+                    if (mHomeworkAdapter != null) {
+                        lvCalendar.setAdapter(emptyAdapter);
+                    }*/
+        }
+
         calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
             public void onSelectedDayChange(CalendarView view, int year, int month, int day) {
+
+
                 String date;
                 //The date is passed as #/##/## this makes it so it is passed as ##/##/## so
                 //The db will be able to query
@@ -103,21 +136,29 @@ public class ScheduleActivity extends Activity {
                     }
                     //Toast.makeText(getApplicationContext(), date, Toast.LENGTH_SHORT).show();
                 }
-                //This changes the bottom bar to what ever the selected date is
-                bottomDate.setText((month + 1) + "/" + day + "/" + (year-2000));
-
+                //This changes the bottom bar to what ever the selected date is if date is current
+                //date Changes it to 'Today'
+                if(date.equals(today)){
+                    bottomDate.setText("Today");
+                }else {
+                    bottomDate.setText((month + 1) + "/" + day + "/" + (year - 2000));
+                }
                 //Checks if there is an event on the selected date
                 if(!db.getEventByDate(date).isEmpty()) {
+                    lvCalendar.setVisibility(view.VISIBLE);
+                    noEvent.setVisibility(view.GONE);
                     mHomeworkAdapter = new EventAdapter(getApplicationContext(), R.layout.schedulerow,  db.getEventByDate(date));
                     if (mHomeworkAdapter != null) {
                         lvCalendar.setAdapter(mHomeworkAdapter);
                     }
                 }else{
                     //Toast.makeText(getApplicationContext(), "Should display 'No Event Add Event'", Toast.LENGTH_SHORT).show();
-                    emptyAdapter = new ArrayAdapter(getApplicationContext(), android.R.layout.simple_list_item_1,  arCalendarEvents2);
+                    lvCalendar.setVisibility(view.GONE);
+                    noEvent.setVisibility(view.VISIBLE);
+                    /*emptyAdapter = new ArrayAdapter(getApplicationContext(), android.R.layout.simple_list_item_1,  arCalendarEvents2);
                     if (mHomeworkAdapter != null) {
                         lvCalendar.setAdapter(emptyAdapter);
-                    }
+                    }*/
                 }
             }
         });
@@ -138,7 +179,7 @@ public class ScheduleActivity extends Activity {
             public void onClick(View v) {
                 if(up == false){
                     rlSchedule.startAnimation(animSlideUp);
-                    calendarView.setVisibility(v.GONE);
+                    //calendarView.setVisibility(v.GONE);
                     collapseListView.setVisibility(v.VISIBLE);
                     expandListView.setVisibility(v.GONE);
                     up = true;
@@ -168,7 +209,7 @@ public class ScheduleActivity extends Activity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_lift, menu);
+        getMenuInflater().inflate(R.menu.menu_today, menu);
         return super.onCreateOptionsMenu(menu);
 
     }
@@ -181,11 +222,9 @@ public class ScheduleActivity extends Activity {
                 startActivity(home);
                 finish();
                 return true;
-            case R.id.addItem:
-                animTest = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.abc_fade_in);
+            case R.id.goToToday:
+                calendarView.setDate(System.currentTimeMillis());
 
-                Intent i = new Intent(getApplicationContext(), AddEvent.class);
-                startActivity(i);
                 return true;
         }
         return super.onOptionsItemSelected(item);
