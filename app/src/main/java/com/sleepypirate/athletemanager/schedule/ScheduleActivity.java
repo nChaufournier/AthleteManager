@@ -18,6 +18,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.sleepypirate.athletemanager.Databases.EventsDataSource;
+import com.sleepypirate.athletemanager.MainActivity;
 import com.sleepypirate.athletemanager.R;
 
 import java.sql.SQLException;
@@ -33,7 +34,8 @@ import java.util.List;
 public class ScheduleActivity extends Activity {
 
     ListView lvCalendar;
-    ArrayAdapter mHomeworkAdapter;
+    EventAdapter mHomeworkAdapter;
+    ArrayAdapter emptyAdapter;
     CalendarView calendarView;
     ImageButton expandListView;
     ImageButton collapseListView;
@@ -57,8 +59,7 @@ public class ScheduleActivity extends Activity {
 
     };
     private String[] arCalendarEvents2 = {
-            "Religion: Reading",
-            "Networking: Program"
+            "No Events Please add an Event"
 
     };
 
@@ -88,9 +89,19 @@ public class ScheduleActivity extends Activity {
                 //The date is passed as #/##/## this makes it so it is passed as ##/##/## so
                 //The db will be able to query
                 if(month < 9){
-                    date = "0"+(month + 1) + "/" + day + "/" + (year-2000);
+                    if(day <= 9){
+                        date = "0"+(month + 1) + "/0" + day + "/" + (year-2000);
+                    }else{
+                        date = "0"+(month + 1) + "/" + day + "/" + (year-2000);
+                    }
+                    //Toast.makeText(getApplicationContext(), date, Toast.LENGTH_SHORT).show();
                 }else{
-                    date = (month + 1) + "/" + day + "/" + (year-2000);
+                    if(day <= 9){
+                        date = (month + 1) + "/0" + day + "/" + (year-2000);
+                    }else{
+                        date = (month + 1) + "/" + day + "/" + (year-2000);
+                    }
+                    //Toast.makeText(getApplicationContext(), date, Toast.LENGTH_SHORT).show();
                 }
                 //This changes the bottom bar to what ever the selected date is
                 bottomDate.setText((month + 1) + "/" + day + "/" + (year-2000));
@@ -100,6 +111,12 @@ public class ScheduleActivity extends Activity {
                     mHomeworkAdapter = new EventAdapter(getApplicationContext(), R.layout.schedulerow,  db.getEventByDate(date));
                     if (mHomeworkAdapter != null) {
                         lvCalendar.setAdapter(mHomeworkAdapter);
+                    }
+                }else{
+                    //Toast.makeText(getApplicationContext(), "Should display 'No Event Add Event'", Toast.LENGTH_SHORT).show();
+                    emptyAdapter = new ArrayAdapter(getApplicationContext(), android.R.layout.simple_list_item_1,  arCalendarEvents2);
+                    if (mHomeworkAdapter != null) {
+                        lvCalendar.setAdapter(emptyAdapter);
                     }
                 }
             }
@@ -160,6 +177,8 @@ public class ScheduleActivity extends Activity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
+                Intent home = new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(home);
                 finish();
                 return true;
             case R.id.addItem:
