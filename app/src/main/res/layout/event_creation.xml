@@ -90,7 +90,7 @@
         android:elevation="2dp"
         android:textColor="#FFEB3B"
         android:background="#F44336"/-->
-     <Button
+     <!--Button
          android:id="@+id/btnViewRecords"
          android:text="View"
          android:layout_below="@id/etNote"
@@ -99,7 +99,7 @@
          android:layout_marginTop="5dp"
          android:elevation="2dp"
          android:textColor="#F44336"
-         android:background="#FFEB3B"/>
+         android:background="#FFEB3B"-->
     </RelativeLayout>
 
 </RelativeLayout>

@@ -95,7 +95,7 @@ public class ScheduleActivity extends Activity {
         SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yy");
         String selectedDate = sdf.format(new Date(calendarView.getDate()));
         today = selectedDate;
-        Toast.makeText(this, selectedDate, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, selectedDate, Toast.LENGTH_SHORT).show();
         if(!db.getEventByDate(selectedDate).isEmpty()) {
             //lvCalendar.setVisibility(view.VISIBLE);
             //noEvent.setVisibility(view.GONE);
@@ -134,7 +134,6 @@ public class ScheduleActivity extends Activity {
                     }else{
                         date = (month + 1) + "/" + day + "/" + (year-2000);
                     }
-                    //Toast.makeText(getApplicationContext(), date, Toast.LENGTH_SHORT).show();
                 }
                 //This changes the bottom bar to what ever the selected date is if date is current
                 //date Changes it to 'Today'
@@ -152,13 +151,8 @@ public class ScheduleActivity extends Activity {
                         lvCalendar.setAdapter(mHomeworkAdapter);
                     }
                 }else{
-                    //Toast.makeText(getApplicationContext(), "Should display 'No Event Add Event'", Toast.LENGTH_SHORT).show();
                     lvCalendar.setVisibility(view.GONE);
                     noEvent.setVisibility(view.VISIBLE);
-                    /*emptyAdapter = new ArrayAdapter(getApplicationContext(), android.R.layout.simple_list_item_1,  arCalendarEvents2);
-                    if (mHomeworkAdapter != null) {
-                        lvCalendar.setAdapter(emptyAdapter);
-                    }*/
                 }
             }
         });
@@ -179,7 +173,8 @@ public class ScheduleActivity extends Activity {
             public void onClick(View v) {
                 if(up == false){
                     rlSchedule.startAnimation(animSlideUp);
-                    //calendarView.setVisibility(v.GONE);
+                    //calendarView.startAnimation(animSlideDown);
+                    calendarView.setVisibility(v.GONE);
                     collapseListView.setVisibility(v.VISIBLE);
                     expandListView.setVisibility(v.GONE);
                     up = true;
