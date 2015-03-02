@@ -1,10 +1,10 @@
 package com.sleepypirate.athletemanager;
 
-import com.sleepypirate.athletemanager.lifting.Lift;
+import com.sleepypirate.athletemanager.lifting.Exercise;
 
 /**
  * Created by Nic on 1/7/2015.
  */
 public class Data {
-    Lift exercise;
+    Exercise exercise;
 }

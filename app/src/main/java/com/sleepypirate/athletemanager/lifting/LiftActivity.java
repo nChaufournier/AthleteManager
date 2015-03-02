@@ -89,7 +89,7 @@ public class LiftActivity extends Activity implements ActionBar.TabListener{
                 finish();
                 return true;
             case R.id.addItem:
-                Toast.makeText(this, "Add a Lift!", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, "Add a Exercise!", Toast.LENGTH_LONG).show();
                 return true;
         }
         return super.onOptionsItemSelected(item);
