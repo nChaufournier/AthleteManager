@@ -18,7 +18,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".lifting.LiftActivity"
-            android:label="Lifting Section">
+            android:label="Lifting Section"
+            android:uiOptions="splitActionBarWhenNarrow">
 
         </activity>
         <activity android:name=".schedule.ScheduleActivity"

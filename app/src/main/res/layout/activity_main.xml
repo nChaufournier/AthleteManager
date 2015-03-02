@@ -28,7 +28,7 @@
             android:text="Lifts"
             android:padding="40dp"
             android:layout_marginRight="35dp"
-            android:background="@drawable/ic_lift"
+            android:background="@drawable/ic_barbell_light"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <ImageButton
@@ -37,13 +37,13 @@
             android:text="Schedule"
             android:layout_marginRight="35dp"
             android:padding="40dp"
-            android:background="@drawable/ic_schedule"
+            android:background="@drawable/ic_calendar_light"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <ImageButton
             android:id="@+id/btnFood"
             android:text="Food"
-            android:background="@drawable/ic_food"
+            android:background="@drawable/ic_cutlery_light"
             android:padding="40dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />

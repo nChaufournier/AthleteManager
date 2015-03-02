@@ -3,7 +3,24 @@
     <item  android:title="addItem"
         android:id="@+id/addItem"
         android:icon="@drawable/ic_note_add_white"
-        android:showAsAction="ifRoom"/>
+        android:showAsAction="always"
+        />
+
+    <item
+        android:title=""
+        style="@style/AppTheme"
+        android:id="@+id/fab_schedule"
+        android:elevation="10dp"
+        android:icon="@drawable/ic_fab_add"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:showAsAction="always"/>
 
 
 </menu>
