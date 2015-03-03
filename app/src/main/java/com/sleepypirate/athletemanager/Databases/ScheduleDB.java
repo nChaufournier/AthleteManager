@@ -1,16 +1,8 @@
 package com.sleepypirate.athletemanager.Databases;
 
-import android.content.ContentValues;
 import android.content.Context;
-import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.util.Log;
-
-import com.sleepypirate.athletemanager.schedule.Event;
-
-import java.util.LinkedList;
-import java.util.List;
 
 /**
  * This is a database class for SQLite and will hold all of the classes

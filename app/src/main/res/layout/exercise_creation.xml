@@ -21,8 +21,7 @@
 
         <EditText
             android:hint="Exercise Name"
-            android:id="@+id/etExerciseName"
-            android:background="#FFFFFF"
+            android:id="@+id/etExName"
             android:textColor="#000000"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
@@ -30,54 +29,33 @@
             android:layout_marginTop="10dp"
             android:inputType="textCapSentences"/>
 
-        <View
-            android:id="@+id/space3"
-            android:layout_below="@+id/etExerciseName"
-            android:layout_width="fill_parent"
-            android:layout_height="2dp"
-            android:background="#c0c0c0"/>
-
         <Spinner
-            android:layout_below="@+id/space3"
-            android:id="@+id/spinType"
+            android:layout_below="@+id/etExName"
+            android:id="@+id/spExType"
             android:layout_width="fill_parent"
             android:layout_height="50dp"
-            android:background="#FFFFFF"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="15dp"
+
             />
-        <View
-            android:id="@+id/space4"
-            android:layout_below="@+id/spinType"
-            android:layout_width="fill_parent"
-            android:layout_height="2dp"
-            android:background="#c0c0c0"
-            android:layout_marginBottom="10dp"/>
         <Spinner
             android:hint="Reps or Time"
-            android:id="@+id/etRepTime"
-            android:textColor="#000000"
-            android:layout_below="@+id/space4"
+            android:id="@+id/spRepTime"
+            android:layout_below="@+id/spExType"
             android:layout_width="fill_parent"
-            android:layout_height="50dp"/>
-
-        <View
-            android:id="@+id/space5"
-            android:layout_below="@+id/etRepTime"
-            android:layout_width="fill_parent"
-            android:layout_height="2dp"
-            android:background="#c0c0c0"
-            android:layout_marginBottom="10dp"/>
-
+            android:layout_height="50dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="15dp"/>
         <EditText
+            android:id="@+id/etExNote"
             android:inputType="textCapSentences|textMultiLine"
             android:hint="Note: (Optional)"
             android:gravity="top"
             android:textColor="#000000"
-            android:layout_below="@+id/space5"
-            android:id="@+id/etNote"
-            android:paddingLeft="10dp"
             android:layout_width="fill_parent"
-            android:layout_height="200dp"
-            android:background="#FFFFFF"/>
+            android:layout_height="fill_parent"
+            android:layout_below="@id/spRepTime"
+            android:layout_alignParentBottom="true"/>
         <!--Button
             android:text="Save"
             android:layout_centerHorizontal="true"
@@ -89,16 +67,15 @@
             android:elevation="2dp"
             android:textColor="#FFEB3B"
             android:background="#F44336"/-->
-         <!--Button
+         <Button
              android:id="@+id/btnViewRecords"
              android:text="View"
-             android:layout_below="@id/etNote"
+             android:layout_alignParentBottom="true"
              android:layout_width="fill_parent"
              android:layout_height="wrap_content"
-             android:layout_marginTop="5dp"
              android:elevation="2dp"
              android:textColor="#F44336"
-             android:background="#FFEB3B"-->
+             android:background="#FFEB3B"/>
     </RelativeLayout>
 
 </RelativeLayout>

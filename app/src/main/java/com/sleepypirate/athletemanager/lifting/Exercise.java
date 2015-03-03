@@ -6,15 +6,40 @@ package com.sleepypirate.athletemanager.lifting;
 public class Exercise {
     private long _id;
     private String exerciseName;
-    private String exerciseGroup;
-    private String exerciseRep;
+    private String exerciseType;
+    private String exerciseRepTime;
+    private String exNote;
+    private int exNumReps;
+    private int exTime;
 
-    public Exercise(long _id, String exerciseName, String exerciseGroup, String exerciseRep) {
+
+    public Exercise(){
+
+    }
+    public Exercise(long _id, String exerciseName, String exerciseType, String exerciseRepTime) {
         this._id = _id;
         this.exerciseName = exerciseName;
-        this.exerciseGroup = exerciseGroup;
-        this.exerciseRep = exerciseRep;
+        this.exerciseType = exerciseType;
+        this.exerciseRepTime = exerciseRepTime;
     }
+
+    public int getExNumReps() {
+        return exNumReps;
+    }
+
+    public void setExNumReps(int exNumReps) {
+        this.exNumReps = exNumReps;
+    }
+
+    public int getExTime() {
+        return exTime;
+    }
+
+    public void setExTime(int exTime) {
+        this.exTime = exTime;
+    }
+
+
 
     public long get_id() {
         return _id;
@@ -32,19 +57,36 @@ public class Exercise {
         this.exerciseName = exerciseName;
     }
 
-    public String getExerciseGroup() {
-        return exerciseGroup;
+    public String getExerciseType() {
+        return exerciseType;
     }
 
-    public void setExerciseGroup(String exerciseGroup) {
-        this.exerciseGroup = exerciseGroup;
+    public void setExerciseType(String exerciseGroup) {
+        this.exerciseType = exerciseGroup;
     }
 
-    public String getExerciseRep() {
-        return exerciseRep;
+    public String getExerciseRepTime() {
+        return exerciseRepTime;
     }
 
-    public void setExerciseRep(String exerciseRep) {
-        this.exerciseRep = exerciseRep;
+    public void setExerciseRepTime(String exerciseRep) {
+        this.exerciseRepTime = exerciseRep;
+    }
+
+    public String getExNote() {
+        return exNote;
+    }
+
+    public void setExNote(String exNote) {
+        this.exNote = exNote;
+    }
+
+    @Override
+    public String toString() {
+        return "\n" +
+                exerciseName + '\n' +
+                "Muscle Group: " + exerciseType + '\n' +
+                "Reps/Time: " + exerciseRepTime
+                +"\n";
     }
 }

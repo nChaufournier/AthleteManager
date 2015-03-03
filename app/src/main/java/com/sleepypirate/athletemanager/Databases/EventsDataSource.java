@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Nic on 1/21/2015.
+ * Used to connect to database from different activities
  */
 public class EventsDataSource {
 

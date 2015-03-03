@@ -43,9 +43,8 @@ public class AddEvent extends Activity {
     private Button btnSave;
     private Button btnView;
     private String calText;
-    private String spinText;
     //SQLiteDatabase db;
-    private EventsDataSource db;// = new EventsDataSource(this);
+    private EventsDataSource db;
 
 
     @Override
@@ -78,36 +77,13 @@ public class AddEvent extends Activity {
         ddAdapter.setDropDownViewResource(R.layout.test_activity);
         //Apply the adapter to the spinner
         typeSpinner.setAdapter(ddAdapter);
-        spinText = typeSpinner.getSelectedItem().toString();
-        //Toast.makeText(Toast)
 
         //Set the date in a spinner type fashion
         SetDate fromDate = new SetDate(pickDate, this);
         calText = pickDate.getText().toString();
 
 
-        /*btnSave.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                if(name != null && pickDate != null) {
-                    Event newEvent = new Event();
-                    newEvent.setName(name.getText().toString());
-                    newEvent.setType(typeSpinner.getSelectedItem().toString());
-                    newEvent.setDate(pickDate.getText().toString());
-                    newEvent.setNote(note.getText().toString());
-                    db.createEvent(newEvent);
-
-                    //Goes back to the scheduleActivity
-                    Intent i = new Intent(getApplicationContext(), ScheduleActivity.class);
-                    startActivity(i);
-                    Toast.makeText(getApplicationContext(), "Event Created", Toast.LENGTH_LONG).show();
-                }else{
-                    showMessage("Error", "Please add either a Name or Date");
-                }
-            }
-        });
-
+        /*
         btnView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -118,21 +94,6 @@ public class AddEvent extends Activity {
 
     }
 
-    /*protected void onResume(){
-        try {
-            dataSource.open();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        super.onResume();
-    }
-
-    @Override
-    protected void onPause() {
-        dataSource.close();
-        super.onPause();
-    }
-*/
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
