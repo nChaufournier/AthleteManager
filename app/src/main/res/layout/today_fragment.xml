@@ -11,7 +11,7 @@
         android:layout_height="fill_parent" />
     <ImageButton
         style="@style/AppTheme"
-        android:id="@+id/fab_schedule"
+        android:id="@+id/fab_exercise"
         android:elevation="10dp"
         android:src="@drawable/ic_action_new"
         android:background="@drawable/circle"

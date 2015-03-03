@@ -30,6 +30,10 @@
             android:label="Create an Event">
 
             </activity>
+        <activity android:name=".lifting.AddExercise"
+            android:label="Add an Exercise">
+
+            </activity>
         
     </application>
     <uses-permission android:name="android.permission.READ_CALENDAR"/>

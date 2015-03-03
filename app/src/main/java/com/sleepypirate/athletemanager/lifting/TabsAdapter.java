@@ -4,8 +4,8 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.support.v13.app.FragmentPagerAdapter;
 
-import com.sleepypirate.athletemanager.TodayFragment;
-import com.sleepypirate.athletemanager.YesterdayFragment;
+import com.sleepypirate.athletemanager.lifting.TodayFragment;
+import com.sleepypirate.athletemanager.lifting.YesterdayFragment;
 
 /**
  * Created by Nic on 1/6/2015.
