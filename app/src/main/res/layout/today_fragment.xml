@@ -11,17 +11,48 @@
         android:layout_height="fill_parent" />
     <ImageButton
         style="@style/AppTheme"
-        android:id="@+id/fab_exercise"
+        android:id="@+id/fab_exAdd"
         android:elevation="10dp"
-        android:src="@drawable/ic_action_new"
-        android:background="@drawable/circle"
-        android:layout_width="56dp"
-        android:layout_height="56dp"
+        android:src="@drawable/ic_fab_add_light"
+        android:background="#FFFFFF"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
         android:layout_marginRight="16dp"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"/>
+    <ImageButton
+        style="@style/AppTheme"
+        android:id="@+id/fab_exExercise"
+        android:elevation="10dp"
+        android:src="@drawable/ic_fab_barbell_light"
+        android:background="#FFFFFF"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_above="@id/fab_exAdd"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:visibility="invisible"/>
+    <ImageButton
+        style="@style/AppTheme"
+        android:id="@+id/fab_exWorkout"
+        android:elevation="10dp"
+        android:src="@drawable/ic_fab_workout"
+        android:background="#FFFFFF"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_above="@id/fab_exExercise"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:visibility="gone"/>
+
 
 </RelativeLayout>

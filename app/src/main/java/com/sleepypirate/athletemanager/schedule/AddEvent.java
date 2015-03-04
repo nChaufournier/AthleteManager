@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.Animation;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -45,6 +46,8 @@ public class AddEvent extends Activity {
     private String calText;
     //SQLiteDatabase db;
     private EventsDataSource db;
+
+
 
 
     @Override

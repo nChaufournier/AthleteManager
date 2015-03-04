@@ -10,6 +10,7 @@ public class Exercise {
     private String exerciseRepTime;
     private String exNote;
     private int exNumReps;
+    private int exNumSets;
     private int exTime;
 
 
@@ -39,7 +40,13 @@ public class Exercise {
         this.exTime = exTime;
     }
 
+    public int getExNumSets() {
+        return exNumSets;
+    }
 
+    public void setExNumSets(int exNumSets) {
+        this.exNumSets = exNumSets;
+    }
 
     public long get_id() {
         return _id;

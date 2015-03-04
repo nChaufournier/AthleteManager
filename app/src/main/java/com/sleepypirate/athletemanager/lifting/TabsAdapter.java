@@ -11,7 +11,7 @@ import com.sleepypirate.athletemanager.lifting.YesterdayFragment;
  * Created by Nic on 1/6/2015.
  */
 public class TabsAdapter extends FragmentPagerAdapter {
-    String[] tabNames = {"Today", "Yesterday"};
+    String[] tabNames = {"Yesterday", "Today"};
     public TabsAdapter(FragmentManager fm) {
         super(fm);
     }
@@ -22,9 +22,9 @@ public class TabsAdapter extends FragmentPagerAdapter {
 
         switch (position){
             case 0:
-                return new TodayFragment();
-            case 1:
                 return new YesterdayFragment();
+            case 1:
+                return new TodayFragment();
 
         }
         return null;
