@@ -88,6 +88,8 @@ public class Exercise {
         this.exNote = exNote;
     }
 
+
+
     @Override
     public String toString() {
         return "\n" +

@@ -8,7 +8,7 @@ import com.sleepypirate.athletemanager.lifting.TodayFragment;
 import com.sleepypirate.athletemanager.lifting.YesterdayFragment;
 
 /**
- * Created by Nic on 1/6/2015.
+ * This is the tabs adapter for the Exercise activity
  */
 public class TabsAdapter extends FragmentPagerAdapter {
     String[] tabNames = {"Yesterday", "Today"};
@@ -18,14 +18,11 @@ public class TabsAdapter extends FragmentPagerAdapter {
 
     @Override
     public Fragment getItem(int position) {
-
-
         switch (position){
             case 0:
                 return new YesterdayFragment();
             case 1:
                 return new TodayFragment();
-
         }
         return null;
     }

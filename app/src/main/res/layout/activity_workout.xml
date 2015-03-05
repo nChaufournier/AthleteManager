@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="15dp">
+
+    <EditText
+        android:id="@+id/woName"
+        android:hint="Workout Name"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" />
+    <EditText
+        android:id="@+id/woEx1"
+        android:hint="Exercise #1"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" />
+    <EditText
+        android:id="@+id/woEx2"
+        android:hint="Exercise #2"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" />
+    <EditText
+        android:id="@+id/woEx3"
+        android:hint="Exercise #3"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" />
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+        <ImageButton
+            android:contentDescription="FAB to add a workout"
+            android:id="@+id/woFabAdd"
+            android:src="@drawable/ic_fab_add"
+            android:background="@android:color/transparent"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+</LinearLayout>

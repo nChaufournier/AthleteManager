@@ -10,6 +10,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.sleepypirate.athletemanager.R;
 
@@ -29,7 +30,7 @@ public class TodayFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.today_fragment, container, false);
+        final View rootView = inflater.inflate(R.layout.today_fragment, container, false);
         TextView textView = (TextView) rootView.findViewById(R.id.fragmentName);
         textView.setText("Today Fragment");
 
@@ -53,12 +54,21 @@ public class TodayFragment extends Fragment {
                     fabExercise.setVisibility(View.VISIBLE);
                     fabWorkout.setVisibility(View.VISIBLE);
                     fabClicked = true;
-
+                    //Button to Create an Exercise
                     fabExercise.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
                             Intent i = new Intent(getActivity(), AddExercise.class);
                             startActivity(i);
+                        }
+                    });
+
+                    fabWorkout.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Intent in = new Intent(getActivity(), AddWorkout.class);
+                            startActivity(in);
+                            Toast.makeText(getActivity(), "Add Workout!", Toast.LENGTH_SHORT).show();
                         }
                     });
 
