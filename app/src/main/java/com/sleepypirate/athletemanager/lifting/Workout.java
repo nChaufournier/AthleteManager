@@ -12,6 +12,7 @@ public class Workout {
     private ArrayList<Exercise> woList;
     private Exercise woExercise;
     private String woDate;
+    private int woTime;
 
     public Workout() {
 
@@ -53,5 +54,21 @@ public class Workout {
 
     public void setWoExercise(Exercise woExercise) {
         this.woExercise = woExercise;
+    }
+
+    public String getWoDate() {
+        return woDate;
+    }
+
+    public void setWoDate(String woDate) {
+        this.woDate = woDate;
+    }
+
+    public int getWoTime() {
+        return woTime;
+    }
+
+    public void setWoTime(int woTime) {
+        this.woTime = woTime;
     }
 }

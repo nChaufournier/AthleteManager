@@ -22,6 +22,7 @@ import com.sleepypirate.athletemanager.R;
 
 import org.w3c.dom.Text;
 
+import java.net.FileNameMap;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -41,6 +42,15 @@ public class AddWorkout extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_workout);
         woFabAdd = (ImageButton) findViewById(R.id.fab_exAdd);
+
+        woName = (EditText) findViewById(R.id.woName);
+        woEx1 = (EditText) findViewById(R.id.woEx1);
+        woEx1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
 
     }
 

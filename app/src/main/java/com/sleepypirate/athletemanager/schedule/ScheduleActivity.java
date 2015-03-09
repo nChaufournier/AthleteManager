@@ -106,11 +106,7 @@ public class ScheduleActivity extends Activity {
         }else{
             //Toast.makeText(getApplicationContext(), "Should display 'No Event Add Event'", Toast.LENGTH_SHORT).show();
             //lvCalendar.setVisibility(view.GONE);
-            //noEvent.setVisibility(view.VISIBLE);
-                    /*emptyAdapter = new ArrayAdapter(getApplicationContext(), android.R.layout.simple_list_item_1,  arCalendarEvents2);
-                    if (mHomeworkAdapter != null) {
-                        lvCalendar.setAdapter(emptyAdapter);
-                    }*/
+            noEvent.setVisibility(View.VISIBLE);
         }
 
         calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
@@ -156,7 +152,6 @@ public class ScheduleActivity extends Activity {
                 }
             }
         });
-
 
         //For Animations
         calBottomRL = (RelativeLayout) findViewById(R.id.calBottomRL);
