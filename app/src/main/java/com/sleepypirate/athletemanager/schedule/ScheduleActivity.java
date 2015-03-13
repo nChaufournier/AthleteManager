@@ -9,6 +9,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.CalendarView;
 import android.widget.ImageButton;
@@ -93,7 +94,7 @@ public class ScheduleActivity extends Activity {
 
         //Set the initial ListView When Activity is created
         SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yy");
-        String selectedDate = sdf.format(new Date(calendarView.getDate()));
+        final String selectedDate = sdf.format(new Date(calendarView.getDate()));
         today = selectedDate;
         //Toast.makeText(this, selectedDate, Toast.LENGTH_SHORT).show();
         if(!db.getEventByDate(selectedDate).isEmpty()) {
@@ -109,10 +110,17 @@ public class ScheduleActivity extends Activity {
             noEvent.setVisibility(View.VISIBLE);
         }
 
+        //This is where the onclick happens for the list view.
+        lvCalendar.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Toast.makeText(getApplicationContext(), position+" ", Toast.LENGTH_SHORT).show();
+                showMessage(selectedDate, position+ "");
+            }
+        });
         calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
             public void onSelectedDayChange(CalendarView view, int year, int month, int day) {
-
 
                 String date;
                 //The date is passed as #/##/## this makes it so it is passed as ##/##/## so

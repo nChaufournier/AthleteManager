@@ -10,8 +10,6 @@
         android:layout_height="300dp"
         android:showWeekNumber="false"
         android:visibility="visible"
-        android:dateTextAppearance="@android:style/TextAppearance.Medium"
-
         />
     <RelativeLayout
         android:id="@+id/calBottomRL"
