@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -110,14 +111,7 @@ public class ScheduleActivity extends Activity {
             noEvent.setVisibility(View.VISIBLE);
         }
 
-        //This is where the onclick happens for the list view.
-        lvCalendar.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(getApplicationContext(), position+" ", Toast.LENGTH_SHORT).show();
-                showMessage(selectedDate, position+ "");
-            }
-        });
+
         calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
             public void onSelectedDayChange(CalendarView view, int year, int month, int day) {
@@ -158,6 +152,19 @@ public class ScheduleActivity extends Activity {
                     lvCalendar.setVisibility(view.GONE);
                     noEvent.setVisibility(view.VISIBLE);
                 }
+            }
+        });
+
+        //This is where the onclick happens for the list view.
+        lvCalendar.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Log.v("Date:", selectedDate);
+                Event event = db.getEventByDate(selectedDate).get(position);
+                Toast.makeText(getApplicationContext(), position+" ", Toast.LENGTH_SHORT).show();
+                showMessage(event.getDate(), event.getName()+ "\n"
+                        + event.getType() + "\n"
+                        + event.getNote());
             }
         });
 

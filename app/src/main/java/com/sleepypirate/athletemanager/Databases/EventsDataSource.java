@@ -70,13 +70,15 @@ public class EventsDataSource {
                 //database.execSQL("SELECT * FROM "+ ScheduleDB.TABLE_SCHEDULE+ " WHERE " + ScheduleDB.KEY_DATE+ " = " + date);
 
         //SELECT * FROM events WHERE date = 'date';
-        Cursor cursor = database.query(ScheduleDB.TABLE_SCHEDULE, showEvent, selectDate, null, null, null, null);
+        Cursor cursor = database.query(ScheduleDB.TABLE_SCHEDULE, allColumns, selectDate, null, null, null, null);
         cursor.moveToFirst();
         while(!cursor.isAfterLast()){
             Event event = new Event();
             event.set_id(cursor.getLong(0));
             event.setName(cursor.getString(1));
             event.setType(cursor.getString(2));
+            event.setDate(cursor.getString(3));
+            event.setNote(cursor.getString(4));
             events.add(event);
             cursor.moveToNext();
         }

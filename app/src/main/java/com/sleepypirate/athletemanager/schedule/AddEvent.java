@@ -70,7 +70,7 @@ public class AddEvent extends Activity {
         name = (EditText) findViewById(R.id.etEventName);
         typeSpinner = (Spinner) findViewById(R.id.spinType);
         //btnSave = (Button) findViewById(R.id.btnEventSave);
-        //btnView = (Button) findViewById(R.id.btnViewRecords);
+        btnView = (Button) findViewById(R.id.btnViewRecords);
 
         note = (EditText) findViewById(R.id.etNote);
         ArrayAdapter<CharSequence> ddAdapter = ArrayAdapter.createFromResource(this,
@@ -86,14 +86,14 @@ public class AddEvent extends Activity {
         calText = pickDate.getText().toString();
 
 
-        /*
+
         btnView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Toast.makeText(getApplicationContext(),  typeSpinner.getSelectedItem().toString(), Toast.LENGTH_LONG).show();
                 showMessage("All Items", db.getAllEvents().toString());
             }
-        });*/
+        });
 
     }
 
