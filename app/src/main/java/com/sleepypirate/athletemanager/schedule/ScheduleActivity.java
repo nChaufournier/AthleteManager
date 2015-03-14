@@ -2,8 +2,10 @@ package com.sleepypirate.athletemanager.schedule;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.preference.DialogPreference;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -39,7 +41,6 @@ public class ScheduleActivity extends Activity {
 
     ListView lvCalendar;
     EventAdapter mHomeworkAdapter;
-    ArrayAdapter emptyAdapter;
     CalendarView calendarView;
     ImageButton expandListView;
     ImageButton collapseListView;
@@ -52,7 +53,7 @@ public class ScheduleActivity extends Activity {
     TextView noEvent;
     RelativeLayout rlSchedule;
     ImageButton fabSchedule;
-    String today;
+    String today, calSelection;
 
 
     EventsDataSource db;
@@ -62,10 +63,6 @@ public class ScheduleActivity extends Activity {
             "Religion: Test Tomorrow",
             "Religion: Reading",
             "Networking: Program"
-
-    };
-    private String[] arCalendarEvents2 = {
-            "No Events Please add an Event"
 
     };
 
@@ -111,7 +108,7 @@ public class ScheduleActivity extends Activity {
             noEvent.setVisibility(View.VISIBLE);
         }
 
-
+        calSelection = today;
         calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
             public void onSelectedDayChange(CalendarView view, int year, int month, int day) {
@@ -133,6 +130,7 @@ public class ScheduleActivity extends Activity {
                         date = (month + 1) + "/" + day + "/" + (year-2000);
                     }
                 }
+                calSelection = date;
                 //This changes the bottom bar to what ever the selected date is if date is current
                 //date Changes it to 'Today'
                 if(date.equals(today)){
@@ -159,11 +157,11 @@ public class ScheduleActivity extends Activity {
         lvCalendar.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Log.v("Date:", selectedDate);
-                Event event = db.getEventByDate(selectedDate).get(position);
-                Toast.makeText(getApplicationContext(), position+" ", Toast.LENGTH_SHORT).show();
-                showMessage(event.getDate(), event.getName()+ "\n"
-                        + event.getType() + "\n"
+                Log.v("Date:", bottomDate.getText().toString());
+                Event event = db.getEventByDate(calSelection).get(position);
+                Toast.makeText(getApplicationContext(), calSelection, Toast.LENGTH_SHORT).show();
+                showMessage(event.getDate(), event.getName()+ "\nType: "
+                        + event.getType() + "\nNote: "
                         + event.getNote());
             }
         });
@@ -237,9 +235,21 @@ public class ScheduleActivity extends Activity {
 
     public void showMessage(String title, String message) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setCancelable(true);
+        builder.setCancelable(false);
         builder.setTitle(title);
         builder.setMessage(message);
+        builder.setPositiveButton("Edit", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Toast.makeText(getApplicationContext(), "Edit", Toast.LENGTH_SHORT).show();
+            }
+        });
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Toast.makeText(getApplicationContext(), "Cancel", Toast.LENGTH_SHORT).show();
+            }
+        });
         builder.show();
     }
 }

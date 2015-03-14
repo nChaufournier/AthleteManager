@@ -22,7 +22,7 @@ public class EventsDataSource {
     private SQLiteDatabase database;
     private ScheduleDB dbHelper;
     private String[] allColumns = { ScheduleDB.KEY_ID,
-        ScheduleDB.KEY_NAME, ScheduleDB.KEY_TYPE, ScheduleDB.KEY_DATE, ScheduleDB.KEY_NOTE };
+        ScheduleDB.KEY_NAME, ScheduleDB.KEY_TYPE, ScheduleDB.KEY_DATE,ScheduleDB.KEY_TIME, ScheduleDB.KEY_NOTE };
     private String[] showEvent = {ScheduleDB.KEY_ID,
             ScheduleDB.KEY_NAME, ScheduleDB.KEY_TYPE};
 
@@ -44,6 +44,7 @@ public class EventsDataSource {
         values.put(ScheduleDB.KEY_NAME, event.getName());
         values.put(ScheduleDB.KEY_TYPE, event.getType());
         values.put(ScheduleDB.KEY_DATE, event.getDate());
+        values.put(ScheduleDB.KEY_TIME, event.getTime());
         values.put(ScheduleDB.KEY_NOTE, event.getNote());
 
         long insertId = database.insert(ScheduleDB.TABLE_SCHEDULE, null, values);
@@ -64,7 +65,6 @@ public class EventsDataSource {
 
     public List<Event> getEventByDate(String date){
         List<Event> events = new ArrayList<Event>();
-                 //String selectQuery = "SELECT * FROM "+ ScheduleDB.TABLE_SCHEDULE+ " WHERE " + ScheduleDB.KEY_DATE+ " = '" + date+"';";
         String selectDate = ScheduleDB.KEY_DATE+ " = '" + date+"'";
         //Log.v("Date", selectDate);
                 //database.execSQL("SELECT * FROM "+ ScheduleDB.TABLE_SCHEDULE+ " WHERE " + ScheduleDB.KEY_DATE+ " = " + date);
@@ -78,7 +78,8 @@ public class EventsDataSource {
             event.setName(cursor.getString(1));
             event.setType(cursor.getString(2));
             event.setDate(cursor.getString(3));
-            event.setNote(cursor.getString(4));
+            event.setTime(cursor.getString(4));
+            event.setNote(cursor.getString(5));
             events.add(event);
             cursor.moveToNext();
         }
@@ -109,7 +110,8 @@ public class EventsDataSource {
         event.setName(cursor.getString(1));
         event.setType(cursor.getString(2));
         event.setDate(cursor.getString(3));
-        event.setNote(cursor.getString(4));
+        event.setTime(cursor.getString(4));
+        event.setNote(cursor.getString(5));
         return event;
     }
 }

@@ -9,17 +9,19 @@ public class Event {
     private String type;
     private String date;
     private String note;
+    private String time;
 
 
     public Event(){
 
     }
 
-    public Event(long _id, String name, String type, String date, String note) {
+    public Event(long _id, String name, String type, String date, String time,String note) {
         this._id = _id;
         this.name = name;
         this.type = type;
         this.date = date;
+        this.time = time;
         this.note = note;
     }
 
@@ -63,16 +65,21 @@ public class Event {
         this.name = name;
     }
 
+    public String getTime() {
+        return time;
+    }
 
-
+    public void setTime(String time) {
+        this.time = time;
+    }
 
     @Override
     public String toString() {
         return "\nName: " + name
-                +"\nType: " + type
-                +"\nDate: " + date
-                +"\nNote: " + note
-                +"\n";
+                + "\nType: " + type
+                + "\nDate: " + date
+                + "\nTime: " + time
+                + "\nNote: " + note;
     }
 
 

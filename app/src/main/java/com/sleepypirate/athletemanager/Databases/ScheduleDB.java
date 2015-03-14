@@ -9,7 +9,7 @@ import android.database.sqlite.SQLiteOpenHelper;
  */
 public class ScheduleDB extends SQLiteOpenHelper{
     private static final String DATABASE_NAME = "schedule.db";
-    private  static final int DATABASE_VERSION = 1;
+    private  static final int DATABASE_VERSION = 2;
 
     //Table Name Schedule
     public static final String TABLE_SCHEDULE = "events";
@@ -19,6 +19,7 @@ public class ScheduleDB extends SQLiteOpenHelper{
     public static final String KEY_NAME = "eventName";
     public static final String KEY_TYPE = "type";
     public static final String KEY_DATE = "date";
+    public static final String KEY_TIME = "time";
     public static final String KEY_NOTE = "note";
 
     public static final String DATABASE_CREATE = "CREATE TABLE "+TABLE_SCHEDULE +"("
@@ -26,6 +27,7 @@ public class ScheduleDB extends SQLiteOpenHelper{
             + KEY_NAME + " TEXT,"
             + KEY_TYPE + " TEXT,"
             + KEY_DATE + " TEXT,"
+            + KEY_TIME + " TEXT,"
             + KEY_NOTE + " TEXT);";
 
 
