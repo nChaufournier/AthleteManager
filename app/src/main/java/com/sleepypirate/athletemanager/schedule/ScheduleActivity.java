@@ -5,15 +5,12 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.preference.DialogPreference;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.CalendarView;
 import android.widget.ImageButton;
 import android.widget.ListView;
@@ -27,9 +24,8 @@ import com.sleepypirate.athletemanager.R;
 
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
+import java.util.Locale;
 
 /**
  * This is the schedule activity. It is where you will be able to view your classes, on a calendar
@@ -57,14 +53,14 @@ public class ScheduleActivity extends Activity {
 
 
     EventsDataSource db;
-    private String[] arCalendarEvents = {
+    /*private String[] arCalendarEvents = {
             "Calc: Book Problems ",
             "Ethics: Reading",
             "Religion: Test Tomorrow",
             "Religion: Reading",
             "Networking: Program"
 
-    };
+    };*/
 
 
     @Override
@@ -72,8 +68,8 @@ public class ScheduleActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.schedule_activity);
         //Used for Home Button
-
         getActionBar().setDisplayHomeAsUpEnabled(true);
+
         db = new EventsDataSource(this);
         try {
             db.open();
@@ -91,7 +87,7 @@ public class ScheduleActivity extends Activity {
 
 
         //Set the initial ListView When Activity is created
-        SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yy");
+        SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yy", Locale.US);
         final String selectedDate = sdf.format(new Date(calendarView.getDate()));
         today = selectedDate;
         //Toast.makeText(this, selectedDate, Toast.LENGTH_SHORT).show();
@@ -140,15 +136,15 @@ public class ScheduleActivity extends Activity {
                 }
                 //Checks if there is an event on the selected date
                 if(!db.getEventByDate(date).isEmpty()) {
-                    lvCalendar.setVisibility(view.VISIBLE);
-                    noEvent.setVisibility(view.GONE);
+                    lvCalendar.setVisibility(View.VISIBLE);
+                    noEvent.setVisibility(View.GONE);
                     mHomeworkAdapter = new EventAdapter(getApplicationContext(), R.layout.schedulerow,  db.getEventByDate(date));
                     if (mHomeworkAdapter != null) {
                         lvCalendar.setAdapter(mHomeworkAdapter);
                     }
                 }else{
-                    lvCalendar.setVisibility(view.GONE);
-                    noEvent.setVisibility(view.VISIBLE);
+                    lvCalendar.setVisibility(View.GONE);
+                    noEvent.setVisibility(View.VISIBLE);
                 }
             }
         });
@@ -177,19 +173,19 @@ public class ScheduleActivity extends Activity {
             boolean up = false;
             @Override
             public void onClick(View v) {
-                if(up == false){
+                if(!up){
                     rlSchedule.startAnimation(animSlideUp);
                     //calendarView.startAnimation(animSlideDown);
-                    calendarView.setVisibility(v.GONE);
-                    collapseListView.setVisibility(v.VISIBLE);
-                    expandListView.setVisibility(v.GONE);
+                    calendarView.setVisibility(View.GONE);
+                    collapseListView.setVisibility(View.VISIBLE);
+                    expandListView.setVisibility(View.GONE);
                     up = true;
                 }else{
                     calendarView.startAnimation(animSlideDown);
-                    calendarView.setVisibility(v.VISIBLE);
+                    calendarView.setVisibility(View.VISIBLE);
                     calBottomRL.startAnimation(animSlideDown);
-                    collapseListView.setVisibility(v.GONE);
-                    expandListView.setVisibility(v.VISIBLE);
+                    collapseListView.setVisibility(View.GONE);
+                    expandListView.setVisibility(View.VISIBLE);
                     up = false;
                 }
             }
