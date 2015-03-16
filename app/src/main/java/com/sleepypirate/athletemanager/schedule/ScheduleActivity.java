@@ -161,7 +161,8 @@ public class ScheduleActivity extends Activity {
                 Event event = db.getEventByDate(calSelection).get(position);
                 Toast.makeText(getApplicationContext(), calSelection, Toast.LENGTH_SHORT).show();
                 showMessage(event.getDate(), event.getName()+ "\nType: "
-                        + event.getType() + "\nNote: "
+                        + event.getType() + "\nTime: "
+                        + event.getTime() + "\nNote:"
                         + event.getNote());
             }
         });

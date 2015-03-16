@@ -2,36 +2,21 @@ package com.sleepypirate.athletemanager.schedule;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.DatePickerDialog;
-import android.app.ListActivity;
-import android.content.Context;
 import android.content.Intent;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.animation.Animation;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.sleepypirate.athletemanager.Databases.EventsDataSource;
-import com.sleepypirate.athletemanager.Databases.ScheduleDB;
 import com.sleepypirate.athletemanager.R;
 
-import java.lang.reflect.Array;
 import java.sql.SQLException;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.List;
-import java.util.Locale;
-import java.util.Random;
 
 /**
  * AddEvents from this page
@@ -40,6 +25,7 @@ public class AddEvent extends Activity {
     private Spinner typeSpinner;
     private EditText name;
     private EditText pickDate;
+    private EditText pickTime;
     private EditText note;
     private Button btnSave;
     private Button btnView;
@@ -67,12 +53,14 @@ public class AddEvent extends Activity {
 
         //Attach items to the button
         pickDate = (EditText) findViewById(R.id.dpPickDate);
+        pickTime = (EditText) findViewById(R.id.tpTime);
         name = (EditText) findViewById(R.id.etEventName);
         typeSpinner = (Spinner) findViewById(R.id.spinType);
         //btnSave = (Button) findViewById(R.id.btnEventSave);
         btnView = (Button) findViewById(R.id.btnViewRecords);
-
         note = (EditText) findViewById(R.id.etNote);
+
+
         ArrayAdapter<CharSequence> ddAdapter = ArrayAdapter.createFromResource(this,
                 R.array.event_type, R.layout.test_activity);
 
@@ -84,6 +72,9 @@ public class AddEvent extends Activity {
         //Set the date in a spinner type fashion
         SetDate fromDate = new SetDate(pickDate, this);
         calText = pickDate.getText().toString();
+
+        //Set time in a spinner type fashion
+        SetTime fromTime = new SetTime(pickTime, this);
 
 
 
@@ -116,6 +107,7 @@ public class AddEvent extends Activity {
                     newEvent.setName(name.getText().toString());
                     newEvent.setType(typeSpinner.getSelectedItem().toString());
                     newEvent.setDate(pickDate.getText().toString());
+                    newEvent.setTime(pickTime.getText().toString());
                     newEvent.setNote(note.getText().toString());
                     db.createEvent(newEvent);
 
