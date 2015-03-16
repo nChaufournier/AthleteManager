@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.sleepypirate.athletemanager.schedule.Event;
 
@@ -57,10 +58,40 @@ public class EventsDataSource {
         return newEvent;
     }
 
-    public void deleteEvent(Event event){
+    public void editEvent(Event event){
+        ContentValues values = new ContentValues();
+        values.put(ScheduleDB.KEY_ID, event.get_id());
+        values.put(ScheduleDB.KEY_NAME, event.getName());
+        values.put(ScheduleDB.KEY_TYPE, event.getType());
+        values.put(ScheduleDB.KEY_DATE, event.getDate());
+        values.put(ScheduleDB.KEY_TIME, event.getTime());
+        values.put(ScheduleDB.KEY_NOTE, event.getNote());
+        long insertId = event.get_id();
+        database.update(ScheduleDB.TABLE_SCHEDULE,
+                values,ScheduleDB.KEY_ID + " = " + insertId, null);
+    }
+
+    public void deleteEvent(long id){
         System.out.println("Comment deleted with id: ");
-        //database.delete(ScheduleDB.TABLE_EVENTS, ScheduleDB.COLUMN_ID + " = " +
-        //        id, null);
+        //Toast.makeText(context, "Delete Event", Toast.LENGTH_SHORT).show();
+        database.delete(ScheduleDB.TABLE_SCHEDULE, ScheduleDB.KEY_ID + " = " +
+                id, null);
+    }
+
+    public Event getEventById(long id){
+        String selectId = ScheduleDB.KEY_ID + " = '" + id+"'";
+        Cursor cursor = database.query(ScheduleDB.TABLE_SCHEDULE, allColumns, selectId, null, null, null, null);
+        cursor.moveToFirst();
+            Event event = new Event();
+            event.set_id(cursor.getLong(0));
+            event.setName(cursor.getString(1));
+            event.setType(cursor.getString(2));
+            event.setDate(cursor.getString(3));
+            event.setTime(cursor.getString(4));
+            event.setNote(cursor.getString(5));
+            cursor.moveToNext();
+        cursor.close();
+        return event;
     }
 
     public List<Event> getEventByDate(String date){

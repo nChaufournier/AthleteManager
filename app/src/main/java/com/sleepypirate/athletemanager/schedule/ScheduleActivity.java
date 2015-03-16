@@ -157,13 +157,10 @@ public class ScheduleActivity extends Activity {
         lvCalendar.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Log.v("Date:", bottomDate.getText().toString());
+                //Log.v("Date:", bottomDate.getText().toString());
                 Event event = db.getEventByDate(calSelection).get(position);
-                Toast.makeText(getApplicationContext(), calSelection, Toast.LENGTH_SHORT).show();
-                showMessage(event.getDate(), event.getName()+ "\nType: "
-                        + event.getType() + "\nTime: "
-                        + event.getTime() + "\nNote:"
-                        + event.getNote());
+                //Toast.makeText(getApplicationContext(), event.get_id()+"", Toast.LENGTH_SHORT).show();
+                showMessage(event.getDate(), event);
             }
         });
 
@@ -204,6 +201,7 @@ public class ScheduleActivity extends Activity {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(getApplicationContext(), AddEvent.class);
+                i.putExtra("date", calSelection);
                 startActivity(i);
             }
         });
@@ -234,21 +232,27 @@ public class ScheduleActivity extends Activity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void showMessage(String title, String message) {
+    public void showMessage(String title, final Event event) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setCancelable(false);
         builder.setTitle(title);
-        builder.setMessage(message);
+        builder.setMessage(event.getName()+ "\nType: "
+                + event.getType() + "\nTime: "
+                + event.getTime() + "\nNote:"
+                + event.getNote());
         builder.setPositiveButton("Edit", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                Toast.makeText(getApplicationContext(), "Edit", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getApplicationContext(), AddEvent.class);
+                intent.putExtra("Event", event.get_id());
+                startActivity(intent);
+                //Toast.makeText(getApplicationContext(), event.get_id()+"", Toast.LENGTH_SHORT).show();
             }
         });
         builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                Toast.makeText(getApplicationContext(), "Cancel", Toast.LENGTH_SHORT).show();
+                //Does nothing but close the dialog box
             }
         });
         builder.show();

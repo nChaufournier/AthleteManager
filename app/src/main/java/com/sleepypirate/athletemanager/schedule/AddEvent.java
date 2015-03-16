@@ -30,8 +30,10 @@ public class AddEvent extends Activity {
     private Button btnSave;
     private Button btnView;
     private String calText;
+    private Boolean edit;
     //SQLiteDatabase db;
     private EventsDataSource db;
+    Bundle extras;//= getIntent().getExtras();
 
 
 
@@ -51,6 +53,7 @@ public class AddEvent extends Activity {
         //Used for Home Button
         getActionBar().setDisplayHomeAsUpEnabled(true);
 
+
         //Attach items to the button
         pickDate = (EditText) findViewById(R.id.dpPickDate);
         pickTime = (EditText) findViewById(R.id.tpTime);
@@ -60,6 +63,25 @@ public class AddEvent extends Activity {
         btnView = (Button) findViewById(R.id.btnViewRecords);
         note = (EditText) findViewById(R.id.etNote);
 
+        extras = getIntent().getExtras();
+        if(extras != null){
+            if (extras.containsKey("Event")){
+                Long value = extras.getLong("Event");
+                Event editEvent = db.getEventById(value);
+                name.setText(editEvent.getName());
+                pickDate.setText(editEvent.getDate());
+                pickTime.setText(editEvent.getTime());
+                note.setText(editEvent.getNote());
+                edit = true;
+            }else if(extras.containsKey("date")){
+                String value = extras.getString("date");
+                pickDate.setText(value);
+                edit = false;
+            }
+        }else{
+            edit = false;
+
+        }
 
         ArrayAdapter<CharSequence> ddAdapter = ArrayAdapter.createFromResource(this,
                 R.array.event_type, R.layout.test_activity);
@@ -91,7 +113,12 @@ public class AddEvent extends Activity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.save, menu);
+        if (edit){
+            getMenuInflater().inflate(R.menu.menu_edit, menu);
+        }else{
+            getMenuInflater().inflate(R.menu.save, menu);
+        }
+
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -102,22 +129,44 @@ public class AddEvent extends Activity {
                 finish();
                 return true;
             case R.id.mbtnSave:
-                if(name != null && pickDate != null) {
+                if (name != null && pickDate != null) {
                     Event newEvent = new Event();
+                    if(edit){
+                        Long value = extras.getLong("Event");
+                        newEvent.set_id(value);
+                    }
                     newEvent.setName(name.getText().toString());
                     newEvent.setType(typeSpinner.getSelectedItem().toString());
                     newEvent.setDate(pickDate.getText().toString());
                     newEvent.setTime(pickTime.getText().toString());
                     newEvent.setNote(note.getText().toString());
-                    db.createEvent(newEvent);
-
+                    if(edit){
+                        db.editEvent(newEvent);
+                        Toast.makeText(getApplicationContext(), "Event Updated", Toast.LENGTH_LONG).show();
+                    }else {
+                        db.createEvent(newEvent);
+                        Toast.makeText(getApplicationContext(), "Event Created", Toast.LENGTH_LONG).show();
+                    }
                     //Goes back to the scheduleActivity
                     Intent i = new Intent(getApplicationContext(), ScheduleActivity.class);
                     startActivity(i);
-                    Toast.makeText(getApplicationContext(), "Event Created", Toast.LENGTH_LONG).show();
-                }else{
+
+                } else {
                     showMessage("Error", "Please add either a Name or Date");
                 }
+
+                break;
+            case R.id.mbtnDelete:
+                //extras = getIntent().getExtras();
+                if(extras != null) {
+                    Long value = extras.getLong("Event");
+                    db.deleteEvent(value);
+                }
+
+                Intent i = new Intent(getApplicationContext(), ScheduleActivity.class);
+                startActivity(i);
+                Toast.makeText(getApplicationContext(), "Event Deleted", Toast.LENGTH_LONG).show();
+
         }
         return super.onOptionsItemSelected(item);
     }
