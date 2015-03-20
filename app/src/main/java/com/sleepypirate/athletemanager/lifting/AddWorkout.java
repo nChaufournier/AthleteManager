@@ -18,6 +18,7 @@ import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
@@ -42,15 +43,16 @@ public class AddWorkout extends Activity {
     private EditText woEx1;
     private EditText woEx2;
     private EditText woEx3;
+    private LinearLayout llAddWo;
     ImageButton woFabAdd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_workout);
-        woFabAdd = (ImageButton) findViewById(R.id.fab_exAdd);
+        woFabAdd = (ImageButton) findViewById(R.id.woFabAdd);
         getActionBar().setDisplayHomeAsUpEnabled(true);
-
+        llAddWo = (LinearLayout) findViewById(R.id.llAddWorkout);
         woName = (EditText) findViewById(R.id.woName);
         woEx1 = (EditText) findViewById(R.id.woEx1);
         woEx1.setOnClickListener(new View.OnClickListener() {
@@ -64,8 +66,23 @@ public class AddWorkout extends Activity {
             }
         });
 
+        woFabAdd.setOnClickListener(onClick());
+
     }
 
+    private View.OnClickListener onClick() {
+        return new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                EditText edText = new EditText(AddWorkout.this);
+                edText.setId(0);
+                edText.setLayoutParams(new LinearLayout.LayoutParams(
+                        ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+                llAddWo.addView(edText);
+                //llAddWo.addView(addEditView(woEx1.getText().toString()));
+            }
+        };
+    }
 
 
     @Override
@@ -102,4 +119,15 @@ public class AddWorkout extends Activity {
         builder.show();
 
     }
+
+    private EditText addEditView(String text) {
+        final LinearLayout.LayoutParams lparams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        final EditText editText = new EditText(getApplicationContext());
+        editText.setLayoutParams(lparams);
+        editText.setText("New Text: " + text);
+        return editText;
+
+
+    }
+
 }

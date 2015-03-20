@@ -29,7 +29,7 @@
             android:layout_marginTop="10dp"
             android:inputType="textCapSentences"/>
 
-        <Spinner
+        <EditText
             android:layout_below="@+id/etExName"
             android:id="@+id/spExType"
             android:layout_width="fill_parent"

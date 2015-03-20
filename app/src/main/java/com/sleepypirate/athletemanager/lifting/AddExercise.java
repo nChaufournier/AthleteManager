@@ -4,12 +4,15 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -23,7 +26,7 @@ import java.sql.SQLException;
  */
 public class AddExercise extends Activity {
     private EditText etExName;
-    private Spinner spExType;
+    private EditText spExType;
     private Spinner spExRepTime;
     private EditText etExNote;
     private Button btnView;
@@ -43,10 +46,18 @@ public class AddExercise extends Activity {
 
         getActionBar().setDisplayHomeAsUpEnabled(true);
         etExName = (EditText) findViewById(R.id.etExName);
-        spExType = (Spinner) findViewById(R.id.spExType);
-        ArrayAdapter<CharSequence> ddExType = ArrayAdapter.createFromResource(this,
-                R.array.exercise_type, R.layout.test_activity);
-        spExType.setAdapter(ddExType);
+        spExType = (EditText) findViewById(R.id.spExType);
+        //R.array.exercise_catagory
+        /*ArrayAdapter<CharSequence> ddExType = ArrayAdapter.createFromResource(this,
+                R.array.exercise_catagory, R.layout.test_activity);
+
+        spExType.setAdapter(ddExType);*/
+        spExType.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showListMessage("Title");
+            }
+        });
         spExRepTime = (Spinner) findViewById(R.id.spRepTime);
         ArrayAdapter<CharSequence> ddExRep = ArrayAdapter.createFromResource(this,
                 R.array.reps_time, R.layout.test_activity);
@@ -80,7 +91,7 @@ public class AddExercise extends Activity {
                 if(etExName != null){
                     Exercise newExercise = new Exercise();
                     newExercise.setExerciseName(etExName.getText().toString());
-                    newExercise.setExerciseType(spExType.getSelectedItem().toString());
+                    newExercise.setExerciseType(spExType.getText().toString());
                     newExercise.setExerciseRepTime(spExRepTime.getSelectedItem().toString());
                     newExercise.setExNote(etExNote.getText().toString());
                     db.createExercise(newExercise);
@@ -104,6 +115,23 @@ public class AddExercise extends Activity {
         builder.setCancelable(true);
         builder.setTitle(title);
         builder.setMessage(message);
+        builder.show();
+    }
+
+    public void showListMessage(String title)
+    {
+        //Exercise exercises[] = db.getAllExercises().toArray();
+        AlertDialog.Builder builder=new AlertDialog.Builder(this);
+        LayoutInflater inflater = getLayoutInflater();
+        View convertView = (View) inflater.inflate(R.layout.test_activity, null);
+        builder.setView(convertView);
+        builder.setCancelable(true);
+        builder.setTitle(title);
+
+        ListView lv = (ListView) convertView.findViewById(R.id.listView1);
+        ArrayAdapter<Exercise> adapter = new ArrayAdapter<Exercise>(this, android.R.layout.simple_list_item_1, db.getAllExercises());
+        lv.setAdapter(adapter);
+        //builder.setMessage(message);
         builder.show();
     }
 }
