@@ -95,7 +95,8 @@ public class Exercise {
         return "\n" +
                 exerciseName + '\n' +
                 "Muscle Group: " + exerciseType + '\n' +
-                "Reps/Time: " + exerciseRepTime
-                +"\n";
+                "Reps/Time: " + exerciseRepTime + "\n" +
+                "Note: "+exNote+
+                "\n";
     }
 }

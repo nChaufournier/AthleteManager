@@ -51,6 +51,22 @@ public class ExerciseDataSource {
         return newExercise;
     }
 
+    public Exercise getExercise(String ex){
+        String selectExercise = ExerciseDB.KEY_NAME+" = '" + ex + "'";
+
+        Cursor cursor = database.query(ExerciseDB.TABLE_EXERCISE, allColumns, selectExercise, null, null, null, null);
+        cursor.moveToFirst();
+            Exercise exercise = new Exercise();
+            exercise.set_id(cursor.getLong(0));
+            exercise.setExerciseName(cursor.getString(1));
+            exercise.setExerciseType(cursor.getString(2));
+            exercise.setExerciseRepTime(cursor.getString(3));
+            exercise.setExNote(cursor.getString(4));
+            cursor.moveToNext();
+        cursor.close();
+        return exercise;
+    }
+
     public List<Exercise> getAllExercises() {
         List<Exercise> exercises = new ArrayList<Exercise>();
 

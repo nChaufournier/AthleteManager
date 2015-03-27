@@ -19,10 +19,15 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.sleepypirate.athletemanager.Databases.ExerciseDataSource;
+import com.sleepypirate.athletemanager.Databases.WorkoutsDatabase;
 import com.sleepypirate.athletemanager.R;
 
 import java.lang.reflect.Array;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 /**
  * Created by Nic on 1/6/2015.
@@ -37,6 +42,9 @@ public class TodayFragment extends Fragment {
     Animation animSlideUp;
     Animation animMoveUp;
     Animation animTest;
+    WorkoutsDatabase woDb;
+    Date date;
+    DateFormat dateFormat;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -47,6 +55,8 @@ public class TodayFragment extends Fragment {
         }catch (SQLException e){
             e.printStackTrace();
         }
+        dateFormat = new SimpleDateFormat("MM/dd/yyy", Locale.US);
+        date = new Date();
 
 
 
@@ -78,6 +88,7 @@ public class TodayFragment extends Fragment {
                         @Override
                         public void onClick(View v) {
                             showMessage();
+                            Toast.makeText(getActivity(), dateFormat.format(date), Toast.LENGTH_SHORT).show();
                             /*Intent i = new Intent(getActivity(), AddExercise.class);
                             startActivity(i);*/
                         }
@@ -86,8 +97,9 @@ public class TodayFragment extends Fragment {
                     fabWorkout.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            Intent in = new Intent(getActivity(), AddWorkout.class);
-                            startActivity(in);
+                            woDb.showAll(date.toString());
+                            /*Intent in = new Intent(getActivity(), AddWorkout.class);
+                            startActivity(in);*/
                             Toast.makeText(getActivity(), "Add Workout!", Toast.LENGTH_SHORT).show();
                         }
                     });
@@ -117,7 +129,7 @@ public class TodayFragment extends Fragment {
             public void onClick(DialogInterface dialog, int position) {
                 //if (position == 1) {
                     showExtendedMessage(position);
-                    Toast.makeText(getActivity(), dialog.toString(), Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(getActivity(), dialog.toString(), Toast.LENGTH_SHORT).show();
 
                // }
             }
@@ -129,15 +141,18 @@ public class TodayFragment extends Fragment {
     public void showExtendedMessage(int cat)
     {
         AlertDialog.Builder builder=new AlertDialog.Builder(getActivity());
-        builder.setCancelable(false);
+        builder.setCancelable(true);
         builder.setTitle("Exercises");
         if (cat == 0) {
             builder.setItems(R.array.upper_body, new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int position) {
-                    if (position == 1) {
+                    String[] upperBody = getResources().getStringArray(R.array.upper_body);
+                    Toast.makeText(getActivity(), upperBody[position], Toast.LENGTH_SHORT).show();
+                    woDb.addExercide(db.getExercise(upperBody[position]), date.toString());
+                    /*if (position == 1) {
                         Toast.makeText(getActivity(), dialog.toString(), Toast.LENGTH_SHORT).show();
 
-                    }
+                    }*/
                 }
             });
         }else if (cat == 1){
