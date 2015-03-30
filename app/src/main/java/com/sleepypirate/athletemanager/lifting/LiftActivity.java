@@ -63,7 +63,7 @@ public class LiftActivity extends Activity implements ActionBar.TabListener{
         });
         getActionBar().setDisplayHomeAsUpEnabled(true);
 
-        viewPager.setCurrentItem(2);
+        viewPager.setCurrentItem(1);
     }
 
     @Override

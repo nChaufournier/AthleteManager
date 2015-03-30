@@ -30,22 +30,26 @@
             android:inputType="textCapSentences"/>
 
         <EditText
+            android:id="@+id/etExType"
             android:layout_below="@+id/etExName"
-            android:id="@+id/spExType"
+            android:hint="Exercise Type"
             android:layout_width="fill_parent"
             android:layout_height="50dp"
             android:layout_marginTop="15dp"
             android:layout_marginBottom="15dp"
-
+            android:focusable="false"
             />
-        <Spinner
+        <EditText
             android:hint="Reps or Time"
-            android:id="@+id/spRepTime"
-            android:layout_below="@+id/spExType"
+            android:id="@+id/etRepTime"
+            android:layout_below="@+id/etExType"
             android:layout_width="fill_parent"
             android:layout_height="50dp"
             android:layout_marginTop="15dp"
-            android:layout_marginBottom="15dp"/>
+            android:layout_marginBottom="15dp"
+            android:clickable="false"
+            android:focusable="false"
+            />
         <EditText
             android:id="@+id/etExNote"
             android:inputType="textCapSentences|textMultiLine"
@@ -54,7 +58,7 @@
             android:textColor="#000000"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:layout_below="@id/spRepTime"
+            android:layout_below="@id/etRepTime"
             android:layout_alignParentBottom="true"/>
         <!--Button
             android:text="Save"
