@@ -34,7 +34,7 @@ public class LiftActivity extends Activity implements ActionBar.TabListener{
 
         viewPager.setAdapter(tabsAdapter);
         actionBar.setHomeButtonEnabled(false);
-        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
 
         //add the tabs
         for(String tabName : tabsAdapter.getTabNames()){
@@ -48,7 +48,7 @@ public class LiftActivity extends Activity implements ActionBar.TabListener{
 
             @Override
             public void onPageSelected(int position) {
-                getActionBar().setSelectedNavigationItem(position);
+                //getActionBar().setSelectedNavigationItem(position);
             }
 
             @Override
