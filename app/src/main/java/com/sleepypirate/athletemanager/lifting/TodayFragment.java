@@ -97,7 +97,9 @@ public class TodayFragment extends Fragment {
                     fabWorkout.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            woDb.showAll(date.toString());
+                            if(!woDb.isEmpty()) {
+                                woDb.showAll(date.toString());
+                            }
                             /*Intent in = new Intent(getActivity(), AddWorkout.class);
                             startActivity(in);*/
                             Toast.makeText(getActivity(), "Add Workout!", Toast.LENGTH_SHORT).show();
@@ -148,7 +150,7 @@ public class TodayFragment extends Fragment {
                 public void onClick(DialogInterface dialog, int position) {
                     String[] upperBody = getResources().getStringArray(R.array.upper_body);
                     Toast.makeText(getActivity(), upperBody[position], Toast.LENGTH_SHORT).show();
-                    woDb.addExercide(db.getExercise(upperBody[position]), date.toString());
+                    woDb.addExercise(db.getExercise(upperBody[position]), date.toString());
                     /*if (position == 1) {
                         Toast.makeText(getActivity(), dialog.toString(), Toast.LENGTH_SHORT).show();
 

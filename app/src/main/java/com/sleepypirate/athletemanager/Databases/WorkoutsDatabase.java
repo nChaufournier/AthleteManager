@@ -39,12 +39,14 @@ public class WorkoutsDatabase {
 
         @Override
         public Exercise get(Object key) {
-            return null;
+            return workoutDb.get(key);
+            //return null;
         }
 
         @Override
         public boolean isEmpty() {
-            return false;
+            return workoutDb.isEmpty();
+            //return false;
         }
 
         @NonNull
@@ -55,6 +57,7 @@ public class WorkoutsDatabase {
 
         @Override
         public Exercise put(String key, Exercise value) {
+            workoutDb.put(key, value);
             return null;
         }
 
@@ -82,11 +85,15 @@ public class WorkoutsDatabase {
     public WorkoutsDatabase() {
     }
 
-    public void addExercide(Exercise ex, String date){
+    public void addExercise(Exercise ex, String date){
         workoutDb.put(date, ex);
     }
 
     public void showAll(String date){
         Log.v("Workout:", workoutDb.get(date).toString());
+    }
+
+    public boolean isEmpty(){
+        return workoutDb.isEmpty();
     }
 }
