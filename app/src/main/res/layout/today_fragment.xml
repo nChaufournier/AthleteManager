@@ -8,7 +8,12 @@
         android:text="Today Fragment"
         android:gravity="center"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent" />
+        android:layout_height="60dp" />
+    <ListView
+        android:id="@+id/today_lv"
+        android:layout_below="@+id/fragmentName"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
     <ImageButton
         style="@style/AppTheme"
         android:id="@+id/fab_exAdd"

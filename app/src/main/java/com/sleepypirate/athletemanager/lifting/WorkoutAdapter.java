@@ -1,4 +1,4 @@
-package com.sleepypirate.athletemanager.schedule;
+package com.sleepypirate.athletemanager.lifting;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -8,18 +8,19 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import com.sleepypirate.athletemanager.R;
+import com.sleepypirate.athletemanager.schedule.Event;
 
 import java.util.List;
 
 /**
- * This creates the View for the events
+ * Created by pyrom on 1/6/2017.
  */
-public class EventAdapter extends ArrayAdapter<Event> {
+public class WorkoutAdapter extends ArrayAdapter<Workout> {
     Context mContext;
     int mLayoutResourceId;
-    List<Event> mData =null;
+    List<Workout> mData = null;
 
-    public EventAdapter(Context context, int resource, List<Event> data) {
+    public WorkoutAdapter(Context context, int resource, List<Workout> data){
         super(context, resource, data);
         this.mContext = context;
         this.mLayoutResourceId = resource;
@@ -39,15 +40,16 @@ public class EventAdapter extends ArrayAdapter<Event> {
         TextView tvType = (TextView) row.findViewById(R.id.tvType);
 
         //Get the data from the data array
-        Event event = mData.get(position);
+        Workout workout = mData.get(position);
 
         //Setting the view to reflect the data we need to display
-        nameView.setText(event.getName());
-        tvType.setText(event.getType());
+//        nameView.setText(workout.getName());
+//        tvType.setText(workout.getType());
 
         //int resId = mContext.getResources().getIdentifier(event.getName(),"drawable", mContext.getPackageName());
         //imageView.setImageResource(resId);
 
         return row;
     }
+
 }

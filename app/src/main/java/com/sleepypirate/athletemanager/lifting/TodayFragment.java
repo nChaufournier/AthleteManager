@@ -15,6 +15,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -37,6 +38,7 @@ public class TodayFragment extends Fragment {
     private ImageButton fabAdd;
     private ImageButton fabWorkout;
     private ExerciseDataSource db;
+    private ListView today_lv;
     //Animations
     Animation animSlideDown;
     Animation animSlideUp;
@@ -58,6 +60,9 @@ public class TodayFragment extends Fragment {
         dateFormat = new SimpleDateFormat("MM/dd/yyy", Locale.US);
         date = new Date();
 
+        //Today list View
+        today_lv = (ListView) rootView.findViewById(R.id.today_lv);
+
 
 
         TextView textView = (TextView) rootView.findViewById(R.id.fragmentName);
@@ -78,7 +83,7 @@ public class TodayFragment extends Fragment {
             boolean fabClicked = false;
             @Override
             public void onClick(View v) {
-                if(fabClicked != true){
+                if(!fabClicked){
                     //fabExercise.startAnimation(animTest);
                     fabExercise.setVisibility(View.VISIBLE);
                     fabWorkout.setVisibility(View.VISIBLE);
@@ -97,9 +102,9 @@ public class TodayFragment extends Fragment {
                     fabWorkout.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            if(!woDb.isEmpty()) {
-                                woDb.showAll(date.toString());
-                            }
+//                            if(!woDb.isEmpty()) {
+//                                woDb.showAll(date.toString());
+//                            }
                             /*Intent in = new Intent(getActivity(), AddWorkout.class);
                             startActivity(in);*/
                             Toast.makeText(getActivity(), "Add Workout!", Toast.LENGTH_SHORT).show();

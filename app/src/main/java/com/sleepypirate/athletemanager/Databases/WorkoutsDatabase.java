@@ -89,6 +89,10 @@ public class WorkoutsDatabase {
         workoutDb.put(date, ex);
     }
 
+    public void getExercise(Exercise ex, String data){
+
+    }
+
     public void showAll(String date){
         Log.v("Workout:", workoutDb.get(date).toString());
     }

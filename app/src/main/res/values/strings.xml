@@ -39,14 +39,8 @@
     <string-array name="upper_body">
         <item>Arms</item>
         <item>Back</item>
-        <item>Biceps</item>
         <item>Chest</item>
-        <item>Forearms</item>
-        <item>Lats</item>
-        <item>Neck</item>
         <item>Shoulders</item>
-        <item>Traps</item>
-        <item>Triceps</item>
     </string-array>
 
     <string-array name="lower_body">
@@ -57,10 +51,14 @@
     </string-array>
 
     <string-array name="exercise_catagory">
-        <item>Upper Body</item>
-        <item>Lower Body</item>
-        <item>Core</item>
+        <item>All Exercises</item>
+        <item>Arms</item>
+        <item>Back</item>
         <item>Cardio</item>
+        <item>Core</item>
+        <item>Chest</item>
+        <item>Shoulders</item>
+        <item>Legs</item>
     </string-array>
     <string-array name="reps_time">
         <item>Reps</item>
